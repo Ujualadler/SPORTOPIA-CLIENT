@@ -33,6 +33,7 @@ function ChatRoom() {
     messagesHolder.current.addEventListener('scroll', handleScroll)
 
     return () => {
+      if(messagesHolder.current)
       messagesHolder.current.removeEventListener('scroll', handleScroll);
     };
   },[])
