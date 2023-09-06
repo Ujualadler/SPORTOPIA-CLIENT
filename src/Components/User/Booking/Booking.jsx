@@ -172,19 +172,19 @@ function Booking() {
             </div>
             <div>
               <ul className="mt-4 text-center  mb-4">
-                <h2 className="font-bold mt-4 text-white text-lg tracking-wide">
+                <h2 className="font-bold mt-4 text-center text-white text-lg tracking-wide">
                   {result.turfName}
                 </h2>
-                <li className="font-semibold mt-3 text-gray-400">
+                <li className="font-semibold text-center marker: mt-3 text-gray-400">
                   CITY: {result.city}
                 </li>
-                <li className="font-semibold mt-3 text-gray-400">
+                <li className="font-semibold text-center mt-3 text-gray-400">
                   TYPE: {result.turfType}
                 </li>
-                <li className="font-semibold mt-3 text-gray-400">
+                <li className="font-semibold text-center mt-3 text-gray-400">
                   PHONE: {result.phone}
                 </li>
-                <li className="font-semibold mt-3 text-gray-400">
+                <li className="font-semibold text-center mt-3 text-gray-400">
                   AMOUNT: ₹{result.total}
                 </li>
               </ul>
