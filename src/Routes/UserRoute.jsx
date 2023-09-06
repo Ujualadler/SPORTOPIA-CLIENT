@@ -24,7 +24,7 @@ import ClubGalleryPage from "../Pages/User/ClubGalleryPage";
 import ClubUserGalleryPage from "../Pages/User/ClubUserGalleryPage";
 import CreateTournamentPage from "../Pages/User/CreateTournamentPage";
 import ClubTournamentPage from "../Pages/User/ClubTournamentPage";
-import ViewTournamentPage from "../Pages/User/viewTournamentPage";
+import ViewTournamentPage from "../Pages/User/ViewTournamentPage";
 import JoinedTournamentsPage from "../Pages/User/JoinedTournamentsPage";
 import YourTournamentsPage from "../Pages/User/YourTournamentsPage";
 import NotFound from "../Components/Error/NotFound";
