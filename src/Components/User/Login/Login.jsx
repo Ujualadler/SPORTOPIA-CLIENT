@@ -82,14 +82,7 @@ export default function Login() {
                 <div className="mb-5 flex justify-center items-center">
                   <Google />
                 </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="border-b w-1/5 lg:w-1/4"></span>
-                  <a className="text-xs text-center text-red-700 uppercase">
-                    {" "}
-                    <Link to="/otpLogin">or Login with OTP</Link>
-                  </a>
-                  <span className="border-b w-1/5 lg:w-1/4"></span>
-                </div>
+              
                 <div className="mt-4">
                   <label className="block text-gray-200 text-sm font-bold mb-2">
                     Email Address
@@ -121,9 +114,17 @@ export default function Login() {
                   </button>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
+                  <span className="border-b w-1/5 lg:w-1/4"></span>
+                  <a className="text-xs text-center text-red-700 uppercase">
+                    {" "}
+                    <Link to="/otpLogin">OTP LOGIN</Link>
+                  </a>
+                  <span className="border-b w-1/5 lg:w-1/4"></span>
+                </div>
+                <div className="mt-4 flex items-center justify-between">
                   <span className="border-b w-1/5 md:w-1/4"></span>
                   <a href="#" className="text-xs text-gray-500 uppercase">
-                    <Link to="/signup">Register here</Link>
+                    <Link to="/signup">REGISTER HERE</Link>
                   </a>
                   <span className="border-b w-1/5 md:w-1/4"></span>
                 </div>

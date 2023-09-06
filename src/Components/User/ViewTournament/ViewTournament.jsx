@@ -166,7 +166,7 @@ function ViewTournament() {
             <div className="md:col-span-7 col-span-12 flex flex-col justify-center items-center">
               <div className="flex md:flex-row flex-col  sm:justify-around">
                 <div className="m-5 md:m-0 md:mr-5">
-                  <h3 className="text-yellow-700 underline font-bold text-2xl text-center mb-5">
+                  <h3 className="text-yellow-700 underline font-bold md:text-2xl text-xl text-center mb-5">
                     CHAMPIONS
                   </h3>
                   <div className="flex">
@@ -176,14 +176,14 @@ function ViewTournament() {
                       alt=""
                     />
                     <div className="flex justify-center items-center">
-                      <h3 className="text-white text-2xl text-center ml-3 font-bold">
+                      <h3 className="text-white md:text-2xl text-lg text-center ml-3 font-bold">
                         {winners?.first?.clubName}
                       </h3>
                     </div>
                   </div>
                 </div>
                 <div className="m-5 md:m-0 md:ml-5">
-                  <h3 className="text-yellow-700 underline font-bold text-2xl text-center mb-5">
+                  <h3 className="text-yellow-700 underline font-bold md:text-2xl xl text-center mb-5">
                     RUNNER UP
                   </h3>
                   <div className="flex">
@@ -193,7 +193,7 @@ function ViewTournament() {
                       alt=""
                     />
                     <div className="flex justify-center items-center">
-                      <h3 className="text-white text-2xl text-center ml-3 font-bold">
+                      <h3 className="text-white md:text-2xl text-lg text-center ml-3 font-bold">
                         {winners?.second?.clubName}
                       </h3>
                     </div>

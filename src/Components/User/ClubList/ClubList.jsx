@@ -80,13 +80,13 @@ function ClubList() {
                 </div>
                 <div>
                   <ul className="mt-4 mb-4">
-                    <h2 className="font-bold mt-4 text-lg trackinge-wide text-white">
+                    <h2 className="font-bold text-center mt-4 text-lg trackinge-wide text-white">
                       {result.clubName}
                     </h2>
-                    <li className="font-semibold mt-3  text-gray-400">
+                    <li className="font-semibold mt-3 text-center text-gray-400">
                       ADMIN:{result.admin.name}
                     </li>
-                    <li className="font-semibold mt-3  text-gray-400">
+                    <li className="font-semibold mt-3 text-center  text-gray-400">
                       TYPE:{result.clubType}
                     </li>
                   </ul>

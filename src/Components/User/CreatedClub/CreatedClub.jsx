@@ -29,7 +29,7 @@ function CreatedClubs() {
   return (
     <>
       <div className="flex justify-center md:justify-between">
-        <div className="mt-8 mx-11 hidden md:block text-white  md:text-xl font-bold tracking-wide">
+        <div className="mt-8 mx-11  text-white  md:text-xl font-bold tracking-wide">
           CREATED CLUBS
         </div>
         <div className=" transition-transform duration-100 mt-8   text-xl font-bold tracking-wide">
@@ -61,13 +61,13 @@ function CreatedClubs() {
               </div>
               <div className="flex items-center">
                 <ul className="mt-4 mb-4 ">
-                  <h2 className="font-bold mt-4 text-lg text-white trackinge-wide">
+                  <h2 className="font-bold mt-4 text-center text-lg text-white trackinge-wide">
                     {result.clubName}
                   </h2>
-                  <li className="font-semibold mt-3  text-gray-400">
+                  <li className="font-semibold mt-3 text-center  text-gray-400">
                     ADMIN:{result.admin.name}
                   </li>
-                  <li className="font-semibold mt-3  text-gray-400">
+                  <li className="font-semibold mt-3 text-center text-gray-400">
                     TYPE:{result.clubType}
                   </li>
                 </ul>

@@ -61,16 +61,16 @@ function YourTournaments() {
               </div>
               <div className="flex items-center">
                 <ul className="mt-4 mb-4 ">
-                  <h2 className="font-bold mt-4 text-lg text-white trackinge-wide">
+                  <h2 className="font-bold mt-4 text-center text-lg text-white trackinge-wide">
                     {result.tournamentName}
                   </h2>
-                  <li className="font-semibold mt-3  text-gray-400">
+                  <li className="font-semibold mt-3 text-center text-gray-400">
                   Sports type:{result.sportsType}
                   </li>
-                  <li className="font-semibold mt-3  text-gray-400">
+                  <li className="font-semibold mt-3 text-center  text-gray-400">
                     Starting Date:{convertISODateToReadable(result.startingDate)}
                   </li>
-                  <li className="font-semibold mt-3  text-gray-400">
+                  <li className="font-semibold mt-3 text-center  text-gray-400">
                     Ending Date:{convertISODateToReadable(result.endingDate)}
                   </li>
                 </ul>
@@ -89,7 +89,7 @@ function YourTournaments() {
                 >
                   VIEW
                 </button>
-                {role==='admin'?                <button
+                {role==='admin'?<button
                 onClick={() => {
                   editTournament(result._id);
                 }}

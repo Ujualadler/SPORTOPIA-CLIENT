@@ -74,13 +74,13 @@ function YourClubs() {
                 </div>
                 <div className="flex items-center">
                   <ul className="mt-4 mb-4 ">
-                    <h2 className="font-bold mt-4 text-lg text-white trackinge-wide">
+                    <h2 className="font-bold text-center mt-4 text-lg text-white trackinge-wide">
                       {result ? result.clubName : ""}
                     </h2>
-                    <li className="font-semibold mt-3  text-gray-400">
+                    <li className="font-semibold mt-3 text-center  text-gray-400">
                       ADMIN:{result ? result.admin.name : ""}
                     </li>
-                    <li className="font-semibold mt-3  text-gray-400">
+                    <li className="font-semibold mt-3 text-center  text-gray-400">
                       TYPE:{result ? result.clubType : ""}
                     </li>
                   </ul>

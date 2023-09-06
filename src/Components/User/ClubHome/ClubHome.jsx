@@ -117,7 +117,7 @@ function ClubHome() {
           </div>
         ))
       ) : (
-        <div className="flex justify-center items-center mt-10">
+        <div className="flex justify-center items-center h-screen">
           <div className="text-xl font-bold font-heading text-white uppercase md:tracking-widest">
             NO REQUESTS
           </div>
