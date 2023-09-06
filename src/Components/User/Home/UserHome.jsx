@@ -12,7 +12,6 @@ function UserHome() {
       const getBanner = async () => {
         const response = await userAxios.get("/getBanner");
         if (response) {
-          console.log(response.data,'hgjasghghasghsag')
           setBanner(response.data.banner);
         }
       };

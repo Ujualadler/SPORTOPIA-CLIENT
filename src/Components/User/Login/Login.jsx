@@ -55,23 +55,9 @@ export default function Login() {
     }
   };
 
-  const forgotPassword = () => {
-    if(email.trim().length==0){
-      toast.error('Enter email')
-    }else{
-      userAxios.post('/forgottPassword', { email }).then((res) => {
-        toast.success(res.data.messasge)
-      }).catch((error) => {
-        if (error.response.data.errMsg) {
-          toast.error(error.response.data.errMsg)
-        }
-      })
-    }
-  }
-
   return (
     <>
-      <div className="bg-black h-screen ">
+      <div className="bg-black h-full ">
         <div className=" md:py-8">
           <form className="" onSubmit={LoginSubmit}>
             <div className="flex md:bg-none  md:bg-opacity-25 bg-cover bg-center bg-[url('https://wallpaperaccess.com/full/1768022.jpg')] md:border border-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
@@ -98,7 +84,7 @@ export default function Login() {
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="border-b w-1/5 lg:w-1/4"></span>
-                  <a className="text-xs text-center text-gray-200 uppercase">
+                  <a className="text-xs text-center text-blue-700 uppercase">
                     {" "}
                     <Link to="/otpLogin">or Login with OTP</Link>
                   </a>

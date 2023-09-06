@@ -171,7 +171,7 @@ function Booking() {
               </div>
             </div>
             <div>
-              <ul className="mt-4 mb-4">
+              <ul className="mt-4 text-center  mb-4">
                 <h2 className="font-bold mt-4 text-white text-lg tracking-wide">
                   {result.turfName}
                 </h2>

@@ -8,8 +8,8 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const navigate=useNavigate()
 
-  const forgotPassword = () => {
-    event.preventDefault()
+  const forgotPassword = (e) => {
+    e.preventDefault()
     if(email.trim().length==0){
       toast.error('Enter email')
     }else{
