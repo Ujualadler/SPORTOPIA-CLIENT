@@ -58,7 +58,7 @@ export default function SignUp() {
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center md:px-4 md:py-12 lg:px-8 login-signup">
-        <div className="bg-gray-800 rounded-2xl p-14 text-white">
+        <div className="bg-gray-800 md:rounded-2xl p-14 text-white">
           {" "}
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img

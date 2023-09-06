@@ -84,7 +84,7 @@ export default function Login() {
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="border-b w-1/5 lg:w-1/4"></span>
-                  <a className="text-xs text-center text-blue-700 uppercase">
+                  <a className="text-xs text-center text-red-700 uppercase">
                     {" "}
                     <Link to="/otpLogin">or Login with OTP</Link>
                   </a>
