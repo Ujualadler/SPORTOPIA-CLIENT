@@ -1,0 +1,100 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+.react-tel-input .form-control {
+    @apply !w-full py-6 !text-base;
+  }
+  
+  .opt-container {
+    @apply flex justify-between gap-2;
+  }
+  .opt-container input {
+    @apply !mr-0 flex-1 py-5 outline-none;
+  }
+
+:root {
+    --background: #110e0e;
+}
+
+body {
+	font-family:
+		system-ui,
+		-apple-system, /* Firefox supports this but not yet `system-ui` */
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji';
+}
+
+/* .registration-wrapper {
+    height: 100vh;
+} */
+
+.form-holder {
+    width: 500px;
+}
+
+.form-item {
+    border-radius: 4px;
+}
+
+.form-ctl {
+    padding: 0.3rem 0.7rem;
+    border-radius: 3px;
+}
+
+.form-ctl.back {
+    background-color: black;
+    border: 1px solid black;
+    font-weight:bold;
+}
+
+.form-ctl.next {
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+    font-weight:bold;
+
+} 
+
+.form-footer {
+    height: 2.5rem;
+}
+.login-signup{
+    background-color: rgb(233, 235, 240);
+}
+
+.booked {
+    color: red;
+}
+
+.booked .checkbox{
+    cursor:not-allowed;
+    background-color: red;
+}
+
+.break-word {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  
+  .gallery {
+    scrollbar-width: none;
+  }
+  
+  /* Hide scrollbar on Chrome, Safari, and Opera */
+  .gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+  }
+
+
+
