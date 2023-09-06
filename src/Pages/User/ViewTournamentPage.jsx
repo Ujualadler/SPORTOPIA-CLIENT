@@ -1,5 +1,5 @@
 import React from 'react'
-import ViewTournament from '../../Components/User/viewTournament/viewTournament'
+import ViewTournament from '../../Components/User/ViewTournament/ViewTournament'
 import Navbar from '../../Components/User/NavbarUser/NavbarUser'
 import ClubNavbar from '../../Components/User/ClubNavbar/ClubNavbar'
 import { useParams } from 'react-router-dom'
