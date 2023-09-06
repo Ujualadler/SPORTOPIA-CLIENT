@@ -95,7 +95,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
         className=""
         onSubmit={editGame}
       >
-        <div className="grid grid-cols-12 mb-6 md:m-10 ">
+        <div className="grid grid-cols-12 mb-10 md:m-10 ">
           <div className="text-center col-span-12">
             <input
               className="font-bold text-lg text-center rounded-md"

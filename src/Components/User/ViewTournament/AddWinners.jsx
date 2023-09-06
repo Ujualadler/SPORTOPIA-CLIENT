@@ -50,7 +50,7 @@ function AddWinners({ show,clubs,id }) {
       </div>
 
       <div className=" flex flex-col justify-center items-center h-screen ">
-        <form onSubmit={champions} className="grid grid-cols-1 w-96 bg-black bg-opacity-40 p-5">
+        <form onSubmit={champions} className="m-3 md:0  w-96 bg-black bg-opacity-40 p-5">
           <select
             className="m-1 p-3 text-center font-semibold rounded-sm"
             onChange={(e) => setFirst(e.target.value)}

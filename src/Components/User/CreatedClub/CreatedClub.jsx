@@ -29,7 +29,7 @@ function CreatedClubs() {
   return (
     <>
       <div className="flex justify-center md:justify-between">
-        <div className="mt-8 mx-11  text-white  md:text-xl font-bold tracking-wide">
+        <div className="mt-8 mx-11 md:block hidden  text-white  md:text-xl font-bold tracking-wide">
           CREATED CLUBS
         </div>
         <div className=" transition-transform duration-100 mt-8   text-xl font-bold tracking-wide">
