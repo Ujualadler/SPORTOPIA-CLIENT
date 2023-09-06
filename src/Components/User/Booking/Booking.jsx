@@ -24,7 +24,7 @@ function Booking() {
         setTurfData(response.data.result);
       })
       .catch((err) => {
-        navigate('/error')
+        // navigate('/error')
         console.log(err);
       });
   }, []);
@@ -46,7 +46,7 @@ function Booking() {
       const response = await axios.get(endpoint, { params });
       return response.data.features;
     } catch (error) {
-      navigate('/error')
+      // navigate('/error')
       console.error("Error fetching location suggestions:", error);
       return [];
     }
