@@ -133,7 +133,7 @@ function AddFixture() {
                       : ""}
                   </select>
 
-                  <label className="text-white text ml-2" htmlFor="dateInput">
+                  <label className="text-white m-1 p-3 text-center rounded-sm" htmlFor="dateInput">
                     DATE
                   </label>
                   <input
@@ -149,7 +149,7 @@ function AddFixture() {
                   />
                 </div>
                 <div className="col-span-2 flex justify-center items-center">
-                  <div className="text-white text-2xl font-extrabold">VS</div>
+                  <div className="text-white md:text-2xl text-xl font-extrabold">VS</div>
                 </div>
                 <div className="flex flex-col col-span-5 m-2">
                   <select
@@ -168,7 +168,7 @@ function AddFixture() {
                           ))
                       : ""}
                   </select>
-                  <div className="flex flex-col md:col-span-1 col-span-2 ">
+                  <div className="m-1 p-3 text-center rounded-sm">
                     <label className="text-white ml-2">TIME</label>
                     <input
                       onChange={(e) => setTime(e.target.value)}
