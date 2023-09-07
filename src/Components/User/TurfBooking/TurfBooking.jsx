@@ -323,8 +323,8 @@ const TurfBooking = () => {
               </div>
             </div>
           </div>
-          <div className="w-full px-4 shadow-2xl bg-black bg-opacity-50  rounded-lg md:w-1/2 ">
-            <div className="lg:pl-20 mt-4 mb-4">
+          <div className="w-full px-4 shadow-2xl  bg-black bg-opacity-50  rounded-lg md:w-1/2 ">
+            <div className="lg:pl-20 mt-10 mb-4">
               <div className="mb-8 mt-1">
                 <div className="flex mb-4 mr-3 w-full">
                 <font className="inline-block w-2/5 text-gray-100 mr-3 text-lg font-bold font-poppins">
@@ -348,14 +348,14 @@ const TurfBooking = () => {
             ))}
                 </div>
           
-                <h2 className="w-full flex text-lg font-semibold mb-4 dark:text-gray-300">
+                <h2 className="w-full flex text-md font-semibold mb-4 dark:text-gray-300">
                   <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                     TYPE
                   </font>
                   <span>{data ? data.turfType : ""}</span>
                 </h2>
                 <div className=" flex">
-                  <h2 className="w-full text-lg font-semibold align-center mb-4 flex dark:text-gray-300">
+                  <h2 className="w-full text-md font-semibold align-center mb-4 flex dark:text-gray-300">
                     <div className="w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                       TIMING
                     </div>
@@ -366,7 +366,7 @@ const TurfBooking = () => {
                     </span>
                   </h2>
                 </div>
-                <h2 className="w-full mr-6 text-lg font-semibold mb-4 dark:text-gray-300">
+                <h2 className="w-full mr-6 text-md font-semibold mb-4 dark:text-gray-300">
                   <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                     PHONE
                   </font>
@@ -374,7 +374,7 @@ const TurfBooking = () => {
                 </h2>
                 <div className="w-full">
                   <button
-                    className="self-start mr-6 text-lg font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
+                    className="self-start mr-6 text-md font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
                     onClick={toggleDetails}
                   >
                     <font className="text-black mr-3 px-3 pb-1 font-semibold font-poppins rounded-md bg-white ">
@@ -383,25 +383,25 @@ const TurfBooking = () => {
                   </button>
                   {showDetails && (
                     <>
-                      <h2 className="w-full flex mr-6 text-lg font-semibold mb-4 text-gray-300">
+                      <h2 className="w-full flex mr-6  font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           STREET
                         </font>
                         <span>{data ? data.street : ""}</span>
                       </h2>
-                      <h2 className="w-full mr-6 text-lg font-semibold mb-4 text-gray-300">
+                      <h2 className="w-full mr-6 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           CITY
                         </font>
                         {data ? data.city : ""}
                       </h2>
-                      <h2 className="w-full mr-6 text-lg font-semibold mb-4 text-gray-300">
+                      <h2 className="w-full mr-6 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           STATE
                         </font>
                         {data ? data.state : ""}
                       </h2>
-                      <h2 className="w-full mr-6 text-lg font-semibold mb-4 text-gray-300">
+                      <h2 className="w-full mr-6 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           PIN
                         </font>
@@ -411,14 +411,14 @@ const TurfBooking = () => {
                   )}
                 </div>
 
-                <p className="mt-4 mb-4 text-lg font-bold font-poppins text-gray-100 dark:text-gray-100">
+                <p className="mt-4 mb-4 text-md font-bold font-poppins text-gray-100 dark:text-gray-100">
                   <span className="inline-block w-2/5 mr-3">FOR 1 HOUR</span>
                   <span className="text-gray-300">
                     ₹{data ? data.total : ""}
                   </span>
                 </p>
 
-                <p className="mb-4 text-lg font-bold font-poppins  text-gray-100 dark:text-gray-100">
+                <p className="mb-4 text-md font-bold font-poppins  text-gray-100 dark:text-gray-100">
                   <span className="mr-3 inline-block w-2/5">
                     ADVANCE
                   </span>
@@ -430,7 +430,7 @@ const TurfBooking = () => {
                   </span>
                   
                 </p>
-                <p className="mt-4 mb-4 text-lg font-bold text-gray-800 font-poppins dark:text-gray-100">
+                <p className="mt-4 mb-4 text-md font-bold text-gray-800 font-poppins dark:text-gray-100">
                   <span className="inline-block w-2/5 mr-3">DATE</span>
                   <input
                     type="date"
@@ -441,9 +441,9 @@ const TurfBooking = () => {
                     defaultValue={today}
                   />
                 </p>
-                <div className="inline-block mb-8 text-lg font-bold font-poppins text-gray-100 ">
+                <div className="inline-block mb-8 text-md font-bold font-poppins text-gray-100 ">
                   <button
-                    className="self-start mr-6 text-lg font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
+                    className="self-start mr-6  font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
                     onClick={toggleSlots}
                   >
                     <font className="text-white mr-3 px-3 pb-1 font-semibold font-poppins rounded-md bg-black ">
@@ -501,29 +501,28 @@ const TurfBooking = () => {
                     </div>
                   )}
                 </div>
-                {selectedSlots.length? <div className="">
-                  <div className=" mt-4 mb-8 text-lg font-bold font-poppins text-gray-100 ">
+                {selectedSlots.length? <div className="font-poppins">
+                  <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
                     <span className="mr-5">SLOTS</span>
                     <span className="text-gray-400">{selectedSlots}</span>
                   </div>
-                  <div className=" mt-4 mb-8 text-lg font-bold font-poppins text-gray-100 ">
+                  <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
                     <span className="mr-3">TOTAL ADVANCE</span>
                     <span className="text-gray-400" >₹{totalAdvance}</span>
                   </div>
-                  <div className=" mt-4 mb-8 text-lg font-bold font-poppins text-gray-100 ">
+                  <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
                     <span className="mr-3">TOTAL AMOUNT</span>
                     <span className="text-gray-400">₹{totalAmount}</span>
                   </div>
                 </div>:''}
                
               </div>
-              <div className="w-32 mb-8"></div>
               <div className="flex flex-wrap items-center -mx-4">
                 <div className="w-full px-4 mb-4 lg:mb-0 lg:w-1/2">
                   <button
                     type="submit"
                     onClick={handlePayment}
-                    className="flex items-center justify-center w-full p-4 text-red-500 border border-red-500 rounded-md dark:text-gray-200 dark:border-red-600 hover:bg-red-600 hover:border-red-600 hover:text-gray-100 dark:bg-red-600 dark:hover:bg-red-700 dark:hover:border-red-700 dark:hover:text-gray-300"
+                    className="flex items-center justify-center w-full p-3 text-red-500 border border-red-500 rounded-md dark:text-gray-200 dark:border-red-600 hover:bg-red-600 hover:border-red-600 hover:text-gray-100 dark:bg-red-600 dark:hover:bg-red-700 dark:hover:border-red-700 dark:hover:text-gray-300"
                   >
                     BOOK NOW
                   </button>
