@@ -6,6 +6,7 @@ import { ClipLoader } from "react-spinners";
 
 
 function YourTournaments() {
+  
   const userAxios = Useraxios();
   const navigate = useNavigate();
   const [tournamentData, setTournamentData] = useState("");
@@ -15,21 +16,18 @@ function YourTournaments() {
 
   useEffect(() => {
     setLoading(true);
-
     const getData = async (req, res) => {
       try {
         const res = await userAxios.get(`/getYourTournaments?id=${clubId}`);
         if (res) {
           setTournamentData(res.data.result);
           setLoading(false); // Set loading to false after the API call completes
-
         }
       } catch (error) {
         console.log(error);
         navigate("/error");
       }
     };
-
     getData();
   }, []);
 

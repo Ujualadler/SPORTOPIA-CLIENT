@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { useParams } from "react-router-dom";
+import {toast} from "react-toastify";
 import moment from "moment-timezone";
 import UserAxios from "../../../Axios/userAxios";
 import CustomCheckbox from "../../Utilities/CustomCheckBox";
@@ -199,8 +199,6 @@ const TurfBooking = () => {
         (position) => {
           setUserLatitude(position.coords.latitude);
           setUserLongitude(position.coords.longitude);
-		  console.log(userLatitude+'hjkl')
-		  console.log(userLongitude+'bn')
         },
         (error) => {
           navigate('/error')
@@ -254,15 +252,13 @@ const TurfBooking = () => {
   return (
     <section className="overflow-hidden  font-poppins   m-1 ">
       <div className="  ml-3 mr-3 mt-7 ">
-		<Toaster></Toaster>
         <div className="flex justify-between  ">
-          {/* <img className="w-[5rem] " src={data.logo} alt="" /> */}
           <h2 className="max-w-xl md:mb-5 text-xl text-white font-bold md:text-3xl">
-            {data.turfName}
+            {data?.turfName}
           </h2>
           <button
             onClick={handleMaps}
-            className="w-[5.5rem] h-[2rem] font-bold text-white rounded-md bg-black"
+            className="w-[5.5rem] mb-2 h-[2rem] font-bold text-white rounded-sm bg-black"
           >
             {!mapView ? "LOCATION" : "CLOSE"}
           </button>
@@ -328,7 +324,6 @@ const TurfBooking = () => {
             </div>
           </div>
           <div className="w-full px-4 shadow-2xl bg-black bg-opacity-50  rounded-lg md:w-1/2 ">
-            <Toaster position="top-center" reverseOrder={false} />
             <div className="lg:pl-20 mt-4 mb-4">
               <div className="mb-8 mt-1">
                 <div className="flex mb-4 mr-3 w-full">
@@ -425,14 +420,15 @@ const TurfBooking = () => {
 
                 <p className="mb-4 text-lg font-bold font-poppins  text-gray-100 dark:text-gray-100">
                   <span className="mr-3 inline-block w-2/5">
-                    ADVANCE AMOUNT
+                    ADVANCE
                   </span>
                   <span className="text-gray-300">
                     ₹{data ? data.advance : ""}
                   </span>
-                  <span className="text-red-500 text-base ml-4">
-                    [NOT REFUNDABLE]
+                  <span className="text-red-500 sm:ml-4 sm:text-base text-sm">
+                     NONREFUNDABLE
                   </span>
+                  
                 </p>
                 <p className="mt-4 mb-4 text-lg font-bold text-gray-800 font-poppins dark:text-gray-100">
                   <span className="inline-block w-2/5 mr-3">DATE</span>
@@ -507,18 +503,16 @@ const TurfBooking = () => {
                 </div>
                 {selectedSlots.length? <div className="">
                   <div className=" mt-4 mb-8 text-lg font-bold font-poppins text-gray-100 ">
-                    <span className="mr-5">SELECTED SLOTS</span>
-                    <div className="mr-5 text-gray-300">
-                      {selectedSlotDisplay}
-                    </div>
+                    <span className="mr-5">SLOTS</span>
+                    <span className="text-gray-400">{selectedSlots}</span>
                   </div>
                   <div className=" mt-4 mb-8 text-lg font-bold font-poppins text-gray-100 ">
-                    <span className="mr-3">TOTAL ADVANCE TO BE PAID</span>
-                    <span>₹{totalAdvance}</span>
+                    <span className="mr-3">TOTAL ADVANCE</span>
+                    <span className="text-gray-400" >₹{totalAdvance}</span>
                   </div>
                   <div className=" mt-4 mb-8 text-lg font-bold font-poppins text-gray-100 ">
                     <span className="mr-3">TOTAL AMOUNT</span>
-                    <span>₹{totalAmount}</span>
+                    <span className="text-gray-400">₹{totalAmount}</span>
                   </div>
                 </div>:''}
                
