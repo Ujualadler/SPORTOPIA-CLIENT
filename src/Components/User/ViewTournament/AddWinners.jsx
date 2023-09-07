@@ -49,7 +49,7 @@ function AddWinners({ show,clubs,id }) {
         </button>
       </div>
 
-      <div className=" flex flex-col justify-center items-center h-screen ">
+      <div className=" flex flex-col justify-center p-3 items-center h-screen ">
         <form onSubmit={champions} className=" flex flex-col w-96 bg-black bg-opacity-40 ">
           <select
             className="m-1 p-3 text-center  font-semibold rounded-sm"
