@@ -131,7 +131,7 @@ function AddFixture() {
                           ))
                       : ""}
                   </select>
-                  <div className="mt-1 pt-3 w-full">
+                  <div className="mt-1 pt-2 w-full">
                     <label
                       className="text-white text-center rounded-sm"
                       htmlFor="dateInput"
@@ -175,7 +175,7 @@ function AddFixture() {
                           ))
                       : ""}
                   </select>
-                  <div className="m-1 pt-3 text-center rounded-sm">
+                  <div className="m-1 pt-2 text-center rounded-sm">
                     <label className="text-white ml-2">TIME</label>
                     <input
                       onChange={(e) => setTime(e.target.value)}

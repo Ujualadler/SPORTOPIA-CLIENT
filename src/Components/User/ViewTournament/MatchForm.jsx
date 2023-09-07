@@ -109,7 +109,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
           <div className="col-span-12 grid grid-cols-12 m-2 bg-black bg-opacity-40 ">
             <div className="flex flex-col col-span-6  lg:col-span-5 m-2">
               <select
-                className="m-1 p-3 text-center rounded-sm"
+                className="m-1 p-3 text-sm sm:text-base text-center rounded-sm"
                 onChange={(e) => setTeamOne(e.target.value)}
                 defaultValue={teamOne}
               >
@@ -126,7 +126,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                       ))
                   : ""}
               </select>
-              <div className="flex flex-col md:col-span-1 col-span-2">
+              <div className="flex  flex-col md:col-span-1 col-span-2">
                 <label className="text-white text ml-2" htmlFor="">
                   DATE
                 </label>
@@ -135,7 +135,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                   max={tournament ? tournament?.endingDate.split("T")[0] : ""}
                   onChange={(e) => setDate(e.target.value)}
                   defaultValue={date}
-                  className="m-1 p-1 text-center "
+                  className="m-1 p-1 text-center text-sm sm:text-base "
                   type="date"
                 />
               </div>
@@ -163,7 +163,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
               </div>
               <div className="text-md font-semibold mt-2 ">
                 <select
-                  className="m-1  py-2 outline-none text-center rounded-sm"
+                  className="m-1 text-sm sm:text-base py-2 outline-none text-center rounded-sm"
                   onChange={(e) => setWinner(e.target.value)}
                   defaultValue={winner}
                 >
@@ -180,7 +180,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
             </div>
             <div className="flex flex-col col-span-6  lg:col-span-5 m-2">
               <select
-                className="m-1 p-3 text-center rounded-sm"
+                className="m-1 p-3 text-sm sm:text-base text-center rounded-sm"
                 onChange={(e) => setTeamTwo(e.target.value)}
                 value={teamTwo}
               >
@@ -197,7 +197,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                       ))
                   : ""}
               </select>
-              <div className="flex flex-col md:col-span-1 col-span-2 ">
+              <div className="flex text-sm sm:text-base flex-col md:col-span-1 col-span-2 ">
                 <label className="text-white ml-2" htmlFor="">
                   TIME
                 </label>
@@ -233,7 +233,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
               </div>
               <div className="text-md font-semibold mt-2 ">
                 <select
-                  className="m-1  py-2 outline-none text-center rounded-sm"
+                  className="m-1 text-sm sm:text-base  py-2 outline-none text-center rounded-sm"
                   onChange={(e) => setWinner(e.target.value)}
                   defaultValue={winner}
                 >
