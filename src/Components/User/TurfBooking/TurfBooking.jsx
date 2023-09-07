@@ -425,8 +425,8 @@ const TurfBooking = () => {
                   <span className="text-gray-300">
                     ₹{data ? data.advance : ""}
                   </span>
-                  <span className="text-red-500 sm:ml-4 sm:text-base text-sm">
-                     NONREFUNDABLE
+                  <span className="text-red-500 sm:ml-4 ml-1 sm:text-base text-sm">
+                      NONREFUNDABLE
                   </span>
                   
                 </p>
