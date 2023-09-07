@@ -109,7 +109,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
           <div className="col-span-12 grid grid-cols-12 m-2 bg-black bg-opacity-40 ">
             <div className="flex flex-col col-span-6  lg:col-span-5 m-2">
               <select
-                className="m-1 p-2  text-sm sm:text-base text-center rounded-sm"
+                className="md:m-1 p-2  text-sm sm:text-base text-center rounded-sm"
                 onChange={(e) => setTeamOne(e.target.value)}
                 defaultValue={teamOne}
               >
@@ -126,7 +126,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                       ))
                   : ""}
               </select>
-              <div className="flex  flex-col md:col-span-1 col-span-2">
+              <div className="flex  flex-col text-sm sm:text-base md:col-span-1 col-span-2">
                 <label className="text-white text ml-2" htmlFor="">
                   DATE
                 </label>
@@ -135,7 +135,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                   max={tournament ? tournament?.endingDate.split("T")[0] : ""}
                   onChange={(e) => setDate(e.target.value)}
                   defaultValue={date}
-                  className="sm:m-1 p-1 text-center text-sm sm:text-base "
+                  className="sm:m-1 p-2 text-center text-sm sm:text-base "
                   type="date"
                 />
               </div>
@@ -180,7 +180,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
             </div>
             <div className="flex flex-col col-span-6  lg:col-span-5 m-2">
               <select
-                className="m-1 p-2  text-sm sm:text-base text-center rounded-sm"
+                className="md:m-1 p-2  text-sm sm:text-base text-center rounded-sm"
                 onChange={(e) => setTeamTwo(e.target.value)}
                 value={teamTwo}
               >
@@ -198,13 +198,13 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                   : ""}
               </select>
               <div className="flex text-sm sm:text-base w-full flex-col md:col-span-1 col-span-2 ">
-                <label className="text-white ml-2 text-sm sm:text-base" htmlFor="">
+                <label className="text-white ml-2" htmlFor="">
                   TIME
                 </label>
                 <input
                   onChange={(e) => setTime(e.target.value)}
                   value={time}
-                  className="sm:m-1 p-1 text-center  rounded-sm"
+                  className="sm:m-1 p-2 text-center  rounded-sm"
                   type="time"
                 />
               </div>
