@@ -114,9 +114,9 @@ function AddFixture() {
               </div>
 
               <div className="col-span-12 grid grid-cols-12 m-2 bg-black bg-opacity-40 ">
-                <div className="flex flex-col col-span-5 m-1">
+                <div className="flex flex-col col-span-5 m-2">
                   <select
-                    className="m-1 p-3 text-center w-full rounded-sm"
+                    className="m-1 p-3 text-sm sm:text-base text-center w-full rounded-sm"
                     onChange={(e) => setTeamOne(e.target.value)}
                     defaultValue={teamOne}
                   >
@@ -131,7 +131,7 @@ function AddFixture() {
                           ))
                       : ""}
                   </select>
-                  <div className="m-1 p-3 w-full">
+                  <div className="mt-1 pt-3 w-full">
                     <label
                       className="text-white text-center rounded-sm"
                       htmlFor="dateInput"
@@ -147,7 +147,7 @@ function AddFixture() {
                       }
                       defaultValue={date}
                       onChange={(e) => setDate(e.target.value)}
-                      className="m-1 p-1 w-full text-center"
+                      className="m-1 p-1  w-full text-center"
                       type="date"
                       id="dateInput"
                     />
@@ -160,7 +160,7 @@ function AddFixture() {
                 </div>
                 <div className="flex flex-col col-span-5 m-2">
                   <select
-                    className="m-1 p-3 text-center rounded-sm"
+                    className="m-1 p-3 text-center text-sm sm:text-base rounded-sm"
                     onChange={(e) => setTeamTwo(e.target.value)}
                     defaultValue={teamTwo}
                   >
@@ -175,7 +175,7 @@ function AddFixture() {
                           ))
                       : ""}
                   </select>
-                  <div className="m-1 p-3 text-center rounded-sm">
+                  <div className="m-1 pt-3 text-center rounded-sm">
                     <label className="text-white ml-2">TIME</label>
                     <input
                       onChange={(e) => setTime(e.target.value)}
@@ -201,7 +201,7 @@ function AddFixture() {
               MANAGE GAMES
             </div>
           </div>
-          <div className="overflow-x-scroll bg-black bg-opacity-20 h-[600px]">
+          <div className="overflow-x-scroll mt-1 pt-1 bg-black bg-opacity-20 h-[600px]">
             {matches.length ? (
               matches.map((match) => (
                 <MatchForm
