@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserAxios from "../../../Axios/userAxios";
 import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 function Booking() {
   const userAxios = UserAxios();
@@ -10,6 +11,7 @@ function Booking() {
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [fromSug, setFromSug] = useState(false);
   const [from, setFrom] = useState("");
+  const [loading, setLoading] = useState(true);
   const [nearbyTurfs, setNearbyTurfs] = useState([]);
   const navigate = useNavigate();
 
@@ -18,18 +20,19 @@ function Booking() {
   };
 
   useEffect(() => {
+    setLoading(true);
+
     userAxios
       .get("/getTurfs")
       .then((response) => {
         setTurfData(response.data.result);
+        setLoading(false); // Set loading to false after the API call completes
       })
       .catch((err) => {
         // navigate('/error')
         console.log(err);
       });
   }, []);
-
-
 
   const getLocationSuggestions = async (query) => {
     const MAPBOX_API_KEY =
@@ -41,7 +44,7 @@ function Booking() {
       limit: 4, // Number of suggestions to retrieve
       country: "IN",
     };
-  
+
     try {
       const response = await axios.get(endpoint, { params });
       return response.data.features;
@@ -51,11 +54,10 @@ function Booking() {
       return [];
     }
   };
-  
 
   const handleLocationSuggestion = async (query) => {
     // Get location suggestions when the user types
-    if (query != ''){
+    if (query != "") {
       const suggestions = await getLocationSuggestions(query);
       setLocationSuggestions(suggestions);
     } else {
@@ -84,10 +86,10 @@ function Booking() {
   useEffect(() => {
     // Initially, show all the turfs
     handleSearch();
-  }, [turfData]); 
+  }, [turfData]);
 
   const maxDistance = 10; // Maximum distance in kilometers to show turfs
-  const handleSearch = (fromLatitude,fromLongitude) => {
+  const handleSearch = (fromLatitude, fromLongitude) => {
     if (fromLatitude && fromLongitude) {
       // Get the turfs near the searched location
       const turfsNearLocation = turfData.filter((turf) => {
@@ -96,11 +98,11 @@ function Booking() {
           fromLongitude,
           turf.latitude,
           turf.longitude
-        );   
-        console.log(Math.floor(distance),turf.turfName);
+        );
+        console.log(Math.floor(distance), turf.turfName);
         return Math.floor(distance) <= Math.floor(maxDistance);
       });
-  
+
       setNearbyTurfs(turfsNearLocation);
     } else {
       // If no search input is provided, show all the turfs
@@ -110,100 +112,111 @@ function Booking() {
 
   return (
     <>
-    <div className=" m-1 " >
-      <div className="flex justify-center md:justify-between  ">
-        <div className="mt-8 mx-11 hidden md:block  md:text-xl text-white font-bold tracking-wide">
-          BOOK YOUR FAVOURITE TURF
-        </div>
-        <div className=" transition-transform duration-100 mt-8   md:text-xl font-bold tracking-wide">
-          <div className="  relative">
-            <input
-              type="search"
-              onChange={(e) => {
-                setFromSug(true);
-                setFrom(e.target.value);
-                handleLocationSuggestion(e.target.value); // Fetch suggestions as the user types
-              }}
-              value={from}
-              placeholder={from || "SERACH BY LOCATION"}
-              className="border text-center border-black block p-2  md:mr-12  text-sm text-gray-900 max-h-10  rounded-lg w-80 bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gradient-to-r from-gray-800 to-gray-600 dark:border-black dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-            {/* Display location suggestions */}
-            <ul className="absolute flex flex-col bg-slate-200 z-30 left-0">
-              {fromSug &&
-                locationSuggestions.map((suggestion) => (
-                  <li className="text-lg border-b-2 border-black pl-5" key={suggestion.id}>
-                    <span
-                 
-                      className=" "
-                      onClick={() => {
-                        setFromSug(false);
-                        setFrom(suggestion.place_name); 
-                         // Update the input field with the selected suggestion
-                        setLocationSuggestions([]); // Clear the suggestions list
-                        // Now you can also get the longitude and latitude from suggestion.geometry.coordinates
-                        const [long, lat] = suggestion?.geometry.coordinates;
-                        // Update the turfs based on the selected location
-                        handleSearch(lat,long);
-                      }}
-                    >
-                      {suggestion.place_name}
-                    </span>
-                  </li>
-                ))}
-            </ul>
+      <div className=" m-1 ">
+        <div className="flex justify-center md:justify-between  ">
+          <div className="mt-8 mx-11 hidden md:block  md:text-xl text-white font-bold tracking-wide">
+            BOOK YOUR FAVOURITE TURF
           </div>
-        </div>
-      </div>
-      <div className="  pt-4 pb-4 mt-2">
-        {nearbyTurfs.length>0?nearbyTurfs.map((result) => (
-          <div
-            key={result._id}
-            className="container flex flex-col items-center md:flex-row md:justify-around border border-black mt-7 md:ml-auto bg-gray-900 bg-opacity-60 md:mr-auto rounded-md mb-7 relative shadow-2xl"
-          >
-            <div className="mb-auto md:mt-auto mt-3 flex ">
-              <div className="bg-gradient-to-r from-gray-800 to-gray-600 w-[10rem] h-[10rem] m-auto flex justify-center">
-                <img
-                  className="w-[6rem] h-[6rem]  mb-auto mt-auto"
-                  src={result.logo}
-                  alt="Turf Logo"
-                />
-              </div>
-            </div>
-            <div>
-              <ul className="mt-4 text-center  mb-4">
-                <h2 className="font-bold mt-4 text-center text-white text-lg tracking-wide">
-                  {result.turfName}
-                </h2>
-                <li className="font-semibold text-center marker: mt-3 text-gray-400">
-                  CITY: {result.city}
-                </li>
-                <li className="font-semibold text-center mt-3 text-gray-400">
-                  TYPE: {result.turfType}
-                </li>
-                <li className="font-semibold text-center mt-3 text-gray-400">
-                  PHONE: {result.phone}
-                </li>
-                <li className="font-semibold text-center mt-3 text-gray-400">
-                  AMOUNT: ₹{result.total}
-                </li>
+          <div className=" transition-transform duration-100 mt-8   md:text-xl font-bold tracking-wide">
+            <div className="  relative">
+              <input
+                type="search"
+                onChange={(e) => {
+                  setFromSug(true);
+                  setFrom(e.target.value);
+                  handleLocationSuggestion(e.target.value); // Fetch suggestions as the user types
+                }}
+                value={from}
+                placeholder={from || "SERACH BY LOCATION"}
+                className="border text-center border-black block p-2  md:mr-12  text-sm text-gray-900 max-h-10  rounded-lg w-80 bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gradient-to-r from-gray-800 to-gray-600 dark:border-black dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              {/* Display location suggestions */}
+              <ul className="absolute flex flex-col bg-slate-200 z-30 left-0">
+                {fromSug &&
+                  locationSuggestions.map((suggestion) => (
+                    <li
+                      className="text-lg border-b-2 border-black pl-5"
+                      key={suggestion.id}
+                    >
+                      <span
+                        className=" "
+                        onClick={() => {
+                          setFromSug(false);
+                          setFrom(suggestion.place_name);
+                          // Update the input field with the selected suggestion
+                          setLocationSuggestions([]); // Clear the suggestions list
+                          // Now you can also get the longitude and latitude from suggestion.geometry.coordinates
+                          const [long, lat] = suggestion?.geometry.coordinates;
+                          // Update the turfs based on the selected location
+                          handleSearch(lat, long);
+                        }}
+                      >
+                        {suggestion.place_name}
+                      </span>
+                    </li>
+                  ))}
               </ul>
             </div>
-            <div className="my-auto">
-              <button
-                onClick={() => {
-                  booking(result._id);
-                }}
-                className="bg-black w-[6rem]  h-[2rem] hover:bg-slate-700 rounded-md mb-3 md:mb-0 text-white font-bold"
-              >
-                VIEW
-              </button>
-            </div>
           </div>
-        )):( <div className="flex items-center justify-center font-extrabold text-black text-3xl text-center">NO TURVES FOUND.</div>)}
+        </div>
+        <div className="  pt-4 pb-4 mt-2">
+          {loading ? (
+            <div className="flex justify-center mt-40 h-80">
+              <ClipLoader color="#ffffff" loading={loading} size={150} />
+            </div>
+          ) : nearbyTurfs.length > 0 ? (
+            nearbyTurfs.map((result) => (
+              <div
+                key={result._id}
+                className="container flex flex-col items-center md:flex-row md:justify-around border border-black mt-7 md:ml-auto bg-gray-900 bg-opacity-60 md:mr-auto rounded-md mb-7 relative shadow-2xl"
+              >
+                <div className="mb-auto md:mt-auto mt-3 flex ">
+                  <div className="bg-gradient-to-r from-gray-800 to-gray-600 w-[10rem] h-[10rem] m-auto flex justify-center">
+                    <img
+                      className="w-[6rem] h-[6rem]  mb-auto mt-auto"
+                      src={result.logo}
+                      alt="Turf Logo"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <ul className="mt-4 text-center  mb-4">
+                    <h2 className="font-bold mt-4 text-center text-white text-lg tracking-wide">
+                      {result.turfName}
+                    </h2>
+                    <li className="font-semibold text-center marker: mt-3 text-gray-400">
+                      CITY: {result.city}
+                    </li>
+                    <li className="font-semibold text-center mt-3 text-gray-400">
+                      TYPE: {result.turfType}
+                    </li>
+                    <li className="font-semibold text-center mt-3 text-gray-400">
+                      PHONE: {result.phone}
+                    </li>
+                    <li className="font-semibold text-center mt-3 text-gray-400">
+                      AMOUNT: ₹{result.total}
+                    </li>
+                  </ul>
+                </div>
+                <div className="my-auto">
+                  <button
+                    onClick={() => {
+                      booking(result._id);
+                    }}
+                    className="bg-black w-[6rem]  h-[2rem] hover:bg-slate-700 rounded-md mb-3 md:mb-0 text-white font-bold"
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="flex items-center justify-center font-extrabold text-black text-3xl text-center">
+              NO TURVES FOUND.
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-      
     </>
   );
 }

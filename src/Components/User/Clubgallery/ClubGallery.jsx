@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-
 function ClubGallery() {
   const userAxios = UserAxios();
   const clubId = useSelector((state) => state.Club.clubId);
@@ -14,21 +13,22 @@ function ClubGallery() {
   const [gallery, setGallery] = useState("");
   const img = useRef();
 
-  useEffect(()=>{
+  useEffect(() => {
+    setLoading(true);
+
     try {
-        const getGallery=async()=>{
-            const response=await userAxios.post('getGallery',{clubId})
-            if(response){
-                setGallery(response.data.gallery)
-            }
+      const getGallery = async () => {
+        const response = await userAxios.post("getGallery", { clubId });
+        if (response) {
+          setGallery(response.data.gallery);
         }
-        getGallery()
+      };
+      getGallery();
     } catch (error) {
-        console.log(error)
-        navigate('/error')
+      console.log(error);
+      navigate("/error");
     }
-    
-  },[state])
+  }, [state]);
 
   const changeimg = (event) => {
     const file = event.target.files[0];
@@ -46,8 +46,8 @@ function ClubGallery() {
       toast.error("Please provide both description and an image file.");
       return;
     }
-    
     try {
+      setLoading(true);
       const response = await userAxios.post(
         "/clubGalleryAdd",
         { content: content, file: file, clubId: clubId },
@@ -55,11 +55,12 @@ function ClubGallery() {
       );
       if (response.data.status === true) {
         toast.success("Saved Successfully");
-        console.log(response.data.gallery+'data')
+        console.log(response.data.gallery + "data");
         setGallery(response.data.gallery);
-        setFile('')
-        setContent(null)
-        setState(true)
+        setLoading(false); // Set loading to false after the API call completes
+        setFile("");
+        setContent(null);
+        setState(true);
       }
     } catch (error) {
       console.log(error);
@@ -68,29 +69,30 @@ function ClubGallery() {
 
   const removeGallery = async (id) => {
     try {
-      console.log(id);
-      const response = await userAxios.post('/removeGallery',{clubId,id});
+      setLoading(true);
+
+      const response = await userAxios.post("/removeGallery", { clubId, id });
       Swal.fire({
-        title:"Are you sure?",
-        text:"Do you want to remove this!",
+        title: "Are you sure?",
+        text: "Do you want to remove this!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText:"REMOVE",
-    }).then((result) => {
-        if (result.isConfirmed==true) {
-            Swal.fire("Successfully removed");
-            setGallery(response.data.gallery)
+        confirmButtonText: "REMOVE",
+      }).then((result) => {
+        if (result.isConfirmed == true) {
+          Swal.fire("Successfully removed");
+          setGallery(response.data.gallery);
+          setLoading(false);
         }
-    });
-    
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(gallery+'gallery')
+  console.log(gallery + "gallery");
 
   return (
     <>
@@ -145,9 +147,16 @@ function ClubGallery() {
           </div>
         </div>
         <div className="col-span-2 gallery overflow-scroll h-[360px]">
-        {gallery.length
-          ? gallery.map((data) => (
-              <div key={data._id} className="bg-black bg-opacity-60 w-100 h-28 flex justify-between p-2 rounded-xl mb-2">
+          {loading ? (
+            <div className="flex justify-center mt-40 h-80">
+              <ClipLoader color="#ffffff" loading={loading} size={150} />
+            </div>
+          ) : gallery.length ? (
+            gallery.map((data) => (
+              <div
+                key={data._id}
+                className="bg-black bg-opacity-60 w-100 h-28 flex justify-between p-2 rounded-xl mb-2"
+              >
                 <img
                   src={data.image} // Use the actual image URL from the data
                   loading="lazy"
@@ -155,17 +164,22 @@ function ClubGallery() {
                   className="w-24 h-24"
                 />
                 <p className="text-white pl-2">{data.content}</p>
-                <button  key={data._id} onClick={()=>removeGallery(data._id)} type="submit" className="w-32 ml-2 bg-black p-2 hover:bg-gray-900">
+                <button
+                  key={data._id}
+                  onClick={() => removeGallery(data._id)}
+                  type="submit"
+                  className="w-32 ml-2 bg-black p-2 hover:bg-gray-900"
+                >
                   REMOVE
                 </button>
               </div>
             ))
-          :(
+          ) : (
             <div className="flex justify-center mt-36 h-screen">
               <div className="text-xl font-bold">EMPTY GALLERY</div>
             </div>
           )}
-          </div>
+        </div>
       </form>
     </>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import UserAxios from "../../../Axios/userAxios";
 import AddReview from "../AddReview/AddReview";
+import { ClipLoader } from "react-spinners";
 
 const Bookinghistory = () => {
   const userAxios = UserAxios();
@@ -11,12 +12,14 @@ const Bookinghistory = () => {
   const [selectedTurfId, setSelectedTurfId] = useState(false);
 
   useEffect(() => {
-    console.log("first");
+    setLoading(true);
+
     userAxios
       .get("/bookingHistory")
       .then((response) => {
         const data = response.data.history;
         setDetails(data);
+        setLoading(false); // Set loading to false after the API call completes
       })
       .catch((err) => {
         navigate("/error");
@@ -56,7 +59,11 @@ const Bookinghistory = () => {
       ) : (
         ""
       )}
-      {details ? (
+      {loading ? (
+        <div className="flex justify-center mt-40 h-80">
+          <ClipLoader color="#ffffff" loading={loading} size={150} />
+        </div>
+      ) : details ? (
         details.map((data) => {
           return (
             <div className="mt-10 flex shadow-2xl flex-col xl:flex-row jusitfy-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
