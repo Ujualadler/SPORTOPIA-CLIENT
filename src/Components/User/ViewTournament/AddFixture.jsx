@@ -147,7 +147,7 @@ function AddFixture() {
                       }
                       defaultValue={date}
                       onChange={(e) => setDate(e.target.value)}
-                      className="m-1 p-1 text-center"
+                      className="m-1 p-1 w-full text-center"
                       type="date"
                       id="dateInput"
                     />
@@ -176,11 +176,11 @@ function AddFixture() {
                       : ""}
                   </select>
                   <div className="m-1 p-3 text-center rounded-sm">
-                    <label className="text-white text-center">TIME</label>
+                    <label className="text-white ml-2">TIME</label>
                     <input
                       onChange={(e) => setTime(e.target.value)}
                       defaultValue={time}
-                      className="m-1 p-1 text-center  rounded-sm"
+                      className="m-1 p-1 text-center w-full rounded-sm"
                       type="time"
                     />
                   </div>
