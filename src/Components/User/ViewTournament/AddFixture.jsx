@@ -197,7 +197,7 @@ function AddFixture() {
           <div className="overflow-x-scroll bg-black bg-opacity-20 h-[600px]">
             {matches.length ? (
               matches.map((match) => (
-                <MatchFormorm
+                <MatchForm
                   key={match?._id}
                   match={match}
                   clubs={clubs}
