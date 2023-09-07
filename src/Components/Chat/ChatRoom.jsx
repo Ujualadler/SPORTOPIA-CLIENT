@@ -46,7 +46,7 @@ function ChatRoom() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://api.spotopia.site/chat");
+    const newSocket = io("https://api.spotopia.site/chat");
     setSocket(newSocket);
 
     return () => {
