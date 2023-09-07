@@ -372,36 +372,36 @@ const TurfBooking = () => {
                   </font>
                   <span>{data ? data.phone : ""}</span>
                 </h2>
-                <div className="w-full">
-                  <button
-                    className="self-start mr-6 text-md font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
+                <div className="w-full bg-gray-900  ">
+                  <div
+                    className="self-start p-1 text-md font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
                     onClick={toggleDetails}
                   >
-                    <font className="text-black mr-3 px-3 pb-1 font-semibold font-poppins rounded-md bg-white ">
+                    <font className="text-white text-center   pb-1 font-semibold font-poppins">
                       {showDetails ? "CLOSE" : "ADDRESS"}<span icon={faCaretDown}></span>
                     </font>
-                  </button>
+                  </div>
                   {showDetails && (
                     <>
-                      <h2 className="w-full flex mr-6  font-semibold mb-4 text-gray-300">
+                      <h2 className="w-full flex mr-6 px-2 font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           STREET
                         </font>
                         <span>{data ? data.street : ""}</span>
                       </h2>
-                      <h2 className="w-full mr-6 text-md font-semibold mb-4 text-gray-300">
+                      <h2 className="w-full mr-6 px-2 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           CITY
                         </font>
                         {data ? data.city : ""}
                       </h2>
-                      <h2 className="w-full mr-6 text-md font-semibold mb-4 text-gray-300">
+                      <h2 className="w-full mr-6 px-2 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           STATE
                         </font>
                         {data ? data.state : ""}
                       </h2>
-                      <h2 className="w-full mr-6 text-md font-semibold mb-4 text-gray-300">
+                      <h2 className="w-full mr-6 px-2 pb-1 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           PIN
                         </font>
@@ -441,15 +441,15 @@ const TurfBooking = () => {
                     defaultValue={today}
                   />
                 </p>
-                <div className="inline-block mb-8 text-md font-bold font-poppins text-gray-100 ">
-                  <button
-                    className="self-start mr-6  font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
+                <div className=" mb-8 text-md font-bold font-poppins bg-gray-900 text-gray-100 ">
+                  <div
+                    className="self-start  p-1 font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
                     onClick={toggleSlots}
                   >
-                    <font className="text-white mr-3 px-3 pb-1 font-semibold font-poppins rounded-md bg-black ">
-                      {showSlots ? "HIDE TIME SLOTS" : "TIME SLOTS"}
+                    <font className="text-white pb-1 font-semibold font-poppins rounded-md  ">
+                      {showSlots ? "CLOSE" : "TIME SLOTS"}
                     </font>
-                  </button>
+                  </div>
                   {showSlots && (
                     <div className="flex flex-wrap text-gray-300">
                       {timeSlots.map((slot, index) => {
