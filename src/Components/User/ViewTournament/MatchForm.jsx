@@ -126,7 +126,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                       ))
                   : ""}
               </select>
-              <div className="flex  flex-col text-sm sm:text-base md:col-span-1 col-span-2">
+              <div className="flex w-full   flex-col text-sm sm:text-base">
                 <label className="text-white text ml-2" htmlFor="">
                   DATE
                 </label>
@@ -197,7 +197,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                       ))
                   : ""}
               </select>
-              <div className="flex text-sm sm:text-base w-full flex-col md:col-span-1 col-span-2 ">
+              <div className="flex text-sm sm:text-base w-full flex-col">
                 <label className="text-white ml-2" htmlFor="">
                   TIME
                 </label>

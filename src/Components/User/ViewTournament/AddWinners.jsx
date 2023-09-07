@@ -43,14 +43,14 @@ function AddWinners({ show,clubs,id }) {
       <div className="text-right">
         <button
           onClick={() => show(false)}
-          className="mt-4 bg-red-700 p-2 mx-auto w-12 first-letter rounded-sm mr-auto  md:mr-2 md:text-2xl text-white font-bold tracking-wide"
+          className="mt-4 bg-red-700 p-2  mx-auto w-12 first-letter rounded-sm  mr-2  md:mr-2 md:text-2xl text-white font-bold tracking-wide"
         >
           X
         </button>
       </div>
 
-      <div className=" flex flex-col justify-center m-4 md:m-0 items-center h-screen ">
-        <form onSubmit={champions} className=" flex flex-col w-96 bg-black bg-opacity-40 ">
+      <div className=" flex flex-col justify-center m-4 md:m-0 items-center sm:h-screen h-[500px]">
+        <form onSubmit={champions} className=" flex flex-col sm:w-96 w-80 bg-black bg-opacity-40 ">
           <select
             className="m-1 p-3 text-center  font-semibold rounded-sm"
             onChange={(e) => setFirst(e.target.value)}

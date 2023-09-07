@@ -114,9 +114,9 @@ function AddFixture() {
               </div>
 
               <div className="col-span-12 grid grid-cols-12 m-2 bg-black bg-opacity-40 ">
-                <div className="flex flex-col col-span-5 m-2">
+                <div className="flex flex-col sm:col-span-5 col-span-6 m-2">
                   <select
-                    className="m-1 p-3 text-sm sm:text-base text-center w-full rounded-sm"
+                    className="md:m-1 p-2 text-sm sm:text-base text-center w-full rounded-sm"
                     onChange={(e) => setTeamOne(e.target.value)}
                     defaultValue={teamOne}
                   >
@@ -131,9 +131,9 @@ function AddFixture() {
                           ))
                       : ""}
                   </select>
-                  <div className="mt-1 pt-2 w-full">
+                  <div className="flex text-sm sm:text-base w-full flex-col">
                     <label
-                      className="text-white text-center rounded-sm"
+                      className="text-white ml-2 rounded-sm"
                       htmlFor="dateInput"
                     >
                       DATE
@@ -147,20 +147,20 @@ function AddFixture() {
                       }
                       defaultValue={date}
                       onChange={(e) => setDate(e.target.value)}
-                      className="m-1 p-1  w-full text-center"
+                      className="sm:m-1 p-2  w-full text-center"
                       type="date"
                       id="dateInput"
                     />
                   </div>
                 </div>
-                <div className="col-span-2 flex justify-center items-center">
+                <div className="col-span-2 hidden  sm:flex justify-center items-center">
                   <div className="text-white md:text-2xl text-xl font-extrabold">
                     VS
                   </div>
                 </div>
-                <div className="flex flex-col col-span-5 m-2">
+                <div className="flex flex-col sm:col-span-5 col-span-6 m-2">
                   <select
-                    className="m-1 p-3 text-center text-sm sm:text-base rounded-sm"
+                    className="sm:m-1 p-2 text-center text-sm sm:text-base rounded-sm"
                     onChange={(e) => setTeamTwo(e.target.value)}
                     defaultValue={teamTwo}
                   >
@@ -175,12 +175,12 @@ function AddFixture() {
                           ))
                       : ""}
                   </select>
-                  <div className="m-1 pt-2 text-center rounded-sm">
+                  <div className="flex text-sm sm:text-base w-full flex-col">
                     <label className="text-white ml-2">TIME</label>
                     <input
                       onChange={(e) => setTime(e.target.value)}
                       defaultValue={time}
-                      className="m-1 p-1 text-center w-full rounded-sm"
+                      className="sm:m-1 p-2 text-center w-full rounded-sm"
                       type="time"
                     />
                   </div>
