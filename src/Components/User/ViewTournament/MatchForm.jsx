@@ -95,7 +95,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
         className=""
         onSubmit={editGame}
       >
-        <div className="grid grid-cols-12 mb-10 md:m-10 ">
+        <div className="grid grid-cols-12 mt-7  mb-10 md:m-10 ">
           <div className="text-center col-span-12">
             <input
               className="font-bold text-lg text-center rounded-md"
@@ -109,7 +109,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
           <div className="col-span-12 grid grid-cols-12 m-2 bg-black bg-opacity-40 ">
             <div className="flex flex-col col-span-6  lg:col-span-5 m-2">
               <select
-                className="m-1 p-3 text-sm sm:text-base text-center rounded-sm"
+                className="m-1 p-2  text-sm sm:text-base text-center rounded-sm"
                 onChange={(e) => setTeamOne(e.target.value)}
                 defaultValue={teamOne}
               >
@@ -135,7 +135,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                   max={tournament ? tournament?.endingDate.split("T")[0] : ""}
                   onChange={(e) => setDate(e.target.value)}
                   defaultValue={date}
-                  className="m-1 p-1 text-center text-sm sm:text-base "
+                  className="sm:m-1 p-1 text-center text-sm sm:text-base "
                   type="date"
                 />
               </div>
@@ -180,7 +180,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
             </div>
             <div className="flex flex-col col-span-6  lg:col-span-5 m-2">
               <select
-                className="m-1 p-3 text-sm sm:text-base text-center rounded-sm"
+                className="m-1 p-2  text-sm sm:text-base text-center rounded-sm"
                 onChange={(e) => setTeamTwo(e.target.value)}
                 value={teamTwo}
               >
@@ -197,27 +197,27 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                       ))
                   : ""}
               </select>
-              <div className="flex text-sm sm:text-base flex-col md:col-span-1 col-span-2 ">
-                <label className="text-white ml-2" htmlFor="">
+              <div className="flex text-sm sm:text-base w-full flex-col md:col-span-1 col-span-2 ">
+                <label className="text-white ml-2 text-sm sm:text-base" htmlFor="">
                   TIME
                 </label>
                 <input
                   onChange={(e) => setTime(e.target.value)}
                   value={time}
-                  className="m-1 p-1 text-center  rounded-sm"
+                  className="sm:m-1 p-1 text-center  rounded-sm"
                   type="time"
                 />
               </div>
             </div>
           </div>
-          <div className="col-span-12 mb-1 flex flex-col lg:hidden  justify-center items-center">
-              <div className="text-xl font-bold mb-2 text-white">SCORE</div>
+          <div className="col-span-12 mb-1 flex flex-col lg:hidden bg-gray-950 bg-opacity-70 m-2  justify-center items-center">
+              <div className="text-lg font-bold mb-2 text-white">SCORE</div>
               <div className="flex justify-center ">
                 <div>
                   <input
                     defaultValue={scoreOne}
                     onChange={(e) => setScoreOne(e.target.value)}
-                    className="w-20 h-10 p-2 text-center"
+                    className="w-[6.7rem] h-8 p-2 text-center"
                     type="text"
                   />
                 </div>
@@ -226,14 +226,14 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                   <input
                     defaultValue={scoreTwo}
                     onChange={(e) => setScoreTwo(e.target.value)}
-                    className="w-20 h-10 p-2 text-center font-lg"
+                    className="w-[6.7rem] h-8 p-2 text-center font-lg"
                     type="text"
                   />
                 </div>
               </div>
-              <div className="text-md font-semibold mt-2 ">
+              <div className="text-md font-base">
                 <select
-                  className="m-1 text-sm sm:text-base  py-2 outline-none text-center rounded-sm"
+                  className="m-1 text-sm sm:text-base w-[14.2rem] p-2 outline-none text-center rounded-sm"
                   onChange={(e) => setWinner(e.target.value)}
                   defaultValue={winner}
                 >
