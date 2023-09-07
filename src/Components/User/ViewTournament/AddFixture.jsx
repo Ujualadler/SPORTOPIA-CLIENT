@@ -79,7 +79,6 @@ function AddFixture() {
     fetchData();
   }, [change]);
 
-
   return (
     <div className=" bg-gray-800  m-1 min-h-screen ">
       {show ? (
@@ -115,9 +114,9 @@ function AddFixture() {
               </div>
 
               <div className="col-span-12 grid grid-cols-12 m-2 bg-black bg-opacity-40 ">
-                <div className="flex flex-col col-span-5 m-2">
+                <div className="flex flex-col col-span-5 m-1">
                   <select
-                    className="m-1 p-3 text-center rounded-sm"
+                    className="m-1 p-3 text-center w-full rounded-sm"
                     onChange={(e) => setTeamOne(e.target.value)}
                     defaultValue={teamOne}
                   >
@@ -132,24 +131,32 @@ function AddFixture() {
                           ))
                       : ""}
                   </select>
-
-                  <label className="text-white m-1 p-3 text-center rounded-sm" htmlFor="dateInput">
-                    DATE
-                  </label>
-                  <input
-                    min={
-                      tournament ? tournament.startingDate.split("T")[0] : ""
-                    }
-                    max={tournament ? tournament.endingDate.split("T")[0] : ""}
-                    defaultValue={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="m-1 p-1 text-center"
-                    type="date"
-                    id="dateInput"
-                  />
+                  <div className="m-1 p-3 w-full">
+                    <label
+                      className="text-white text-center rounded-sm"
+                      htmlFor="dateInput"
+                    >
+                      DATE
+                    </label>
+                    <input
+                      min={
+                        tournament ? tournament.startingDate.split("T")[0] : ""
+                      }
+                      max={
+                        tournament ? tournament.endingDate.split("T")[0] : ""
+                      }
+                      defaultValue={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      className="m-1 p-1 text-center"
+                      type="date"
+                      id="dateInput"
+                    />
+                  </div>
                 </div>
                 <div className="col-span-2 flex justify-center items-center">
-                  <div className="text-white md:text-2xl text-xl font-extrabold">VS</div>
+                  <div className="text-white md:text-2xl text-xl font-extrabold">
+                    VS
+                  </div>
                 </div>
                 <div className="flex flex-col col-span-5 m-2">
                   <select
@@ -169,7 +176,7 @@ function AddFixture() {
                       : ""}
                   </select>
                   <div className="m-1 p-3 text-center rounded-sm">
-                    <label className="text-white ml-2">TIME</label>
+                    <label className="text-white text-center">TIME</label>
                     <input
                       onChange={(e) => setTime(e.target.value)}
                       defaultValue={time}
