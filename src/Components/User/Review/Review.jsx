@@ -4,12 +4,12 @@ const Review = (review) => {
     const data=review.review.reviews
     
     return (
-        data?data.map((doc)=>{return( <div key={data._id} className="py-8 px-4 md:px-3 2xl:px-0 2xl:container 2xl:mx-auto  items-center w-full">
+        data?data.map((doc)=>{return( <div key={data._id} className="py-5 sm:py-8   md:px-3 2xl:px-0 2xl:container 2xl:mx-auto  items-center w-full">
         <div className="flex flex-col justify-start  space-y-3">
             <div className="flex justify-start items-start">
                 <p className="text-xl lg:text-2xl font-bold ml-4 leading-7 font-poppins lg:leading-9 text-white">REVIEWS</p>
             </div>
-            <div className=" flex justify-start items-start flex-col bg-gray-900 bg-opacity-60 p-6 border border-black shadow-2xl rounded-lg">
+            <div className=" flex justify-start items-start flex-col bg-gray-900 bg-opacity-60 p-4 sm:p-6 border border-black shadow-2xl rounded-md">
                 <div className="flex flex-col md:flex-row justify-between w-full">
                     <div className="flex flex-row justify-between items-start">
                         <button  className="ml-4 md:hidden">
@@ -37,12 +37,11 @@ const Review = (review) => {
             ))}
                     </div>
                 </div>
-                {/* className={"md:block " + (menu1 ? "block" : "hidden")} */}
                 <div >
-                    <p className="mt-3 font-semibold leading-normal text-white w-full md:w-9/12 xl:w-5/6">{doc.description}</p>
+                    <p className="mt-3 font-semibold leading-normal ml-2 text-white w-full md:w-9/12 xl:w-5/6">{doc.description}</p>
                     <div className="mt-6 flex justify-start items-center flex-row space-x-2.5">
                         <div>
-                            <img className='w-20 h-20 rounded-full' src={doc.user.image} alt="girl-avatar" />
+                            <img className='sm:w-16 sm:h-16 h-12 w-12 rounded-full' src={doc.user.image} alt="girl-avatar" />
                         </div>
                         <div className="flex flex-col justify-start items-start space-y-2">
                             <p className="text-base font-medium leading-none text-gray-100">{doc.user.name}</p>
