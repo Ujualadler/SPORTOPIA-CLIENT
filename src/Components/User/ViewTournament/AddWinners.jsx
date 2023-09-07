@@ -50,9 +50,9 @@ function AddWinners({ show,clubs,id }) {
       </div>
 
       <div className=" flex flex-col justify-center items-center h-screen ">
-        <form onSubmit={champions} className="m-3 md:0  w-96 bg-black bg-opacity-40 p-5">
+        <form onSubmit={champions} className="m-3 md:0  flex flex-col w-96 bg-black bg-opacity-40 p-5">
           <select
-            className="m-1 p-3 text-center font-semibold rounded-sm"
+            className="m-1 p-3 text-center  font-semibold rounded-sm"
             onChange={(e) => setFirst(e.target.value)}
             defaultValue={first}
           >
@@ -83,7 +83,7 @@ function AddWinners({ show,clubs,id }) {
                   ))
               : ""}
           </select>
-          <button type="submit" className="m-1 text-center text-white font-semibold col-span-1 bg-red-800 p-3 hover:bg-red-500">SAVE</button>
+          <button type="submit" className="m-1  text-center text-white font-semibold col-span-1 bg-red-800 p-3 hover:bg-red-500">SAVE</button>
         </form>
       </div>
     </>
