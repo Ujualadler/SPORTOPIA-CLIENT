@@ -126,8 +126,8 @@ function AddFixture() {
                       ? clubs
                           .filter((club) => club._id !== teamTwo)
                           .map((club) => (
-                            <option key={club.id} value={club._id}>
-                              {club.clubName}
+                            <option key={club?.id} value={club?._id}>
+                              {club?.clubName}
                             </option>
                           ))
                       : ""}
@@ -160,10 +160,10 @@ function AddFixture() {
                     <option value="">Select a club</option>
                     {clubs.length
                       ? clubs
-                          .filter((club) => club.clubName !== teamOne)
+                          .filter((club) => club?.clubName !== teamOne)
                           .map((club) => (
-                            <option key={club.id} value={club._id}>
-                              {club.clubName}
+                            <option key={club?.id} value={club?._id}>
+                              {club?.clubName}
                             </option>
                           ))
                       : ""}
@@ -198,7 +198,7 @@ function AddFixture() {
             {matches.length ? (
               matches.map((match) => (
                 <MatchFormorm
-                  key={match._id}
+                  key={match?._id}
                   match={match}
                   clubs={clubs}
                   id={id}

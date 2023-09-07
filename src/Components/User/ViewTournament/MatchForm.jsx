@@ -8,8 +8,8 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
   const userAxios = UserAxios();
   const navigate=useNavigate()
   const [matchName, setMatchName] = useState(match?.matchName);
-  const [teamOne, setTeamOne] = useState(match?.teamOne._id);
-  const [teamTwo, setTeamTwo] = useState(match?.teamTwo._id);
+  const [teamOne, setTeamOne] = useState(match?.teamOne?._id);
+  const [teamTwo, setTeamTwo] = useState(match?.teamTwo?._id);
   const [scoreOne, setScoreOne] = useState(match?.scoreOne);
   const [scoreTwo, setScoreTwo] = useState(match?.scoreTwo);
   const [winner, setWinner] = useState(match?.winner);
@@ -49,11 +49,11 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
       });
   
       if (response) {
-        if (response.data.message) {
-          toast(response.data.message);
+        if (response?.data?.message) {
+          toast(response?.data?.message);
         }
-        if (response.data.status === true) {
-          setMatches(response.data.updatedTournament);
+        if (response?.data?.status === true) {
+          setMatches(response?.data?.updatedTournament);
           setChange(true);
           toast.success("GAME UPDATED SUCCESSFULLY");
         }
@@ -76,9 +76,9 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
         cancelButtonColor: "#d33",
         confirmButtonText: "REMOVE",
       }).then((result) => {
-        if (result.isConfirmed && response.data.status === true) {
+        if (result.isConfirmed && response?.data?.status === true) {
           Swal.fire("Successfully removed");
-          setMatches(response.data.updatedTournament);
+          setMatches(response?.data?.updatedTournament);
           setChange(true);
         }
       });
@@ -117,11 +117,11 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                 {clubs.length
                   ? clubs
                       .filter(
-                        (club) => club._id !== match?.teamOne?._id || teamOne
+                        (club) => club?._id !== match?.teamOne?._id || teamOne
                       )
                       .map((club) => (
-                        <option key={club.id} value={club._id}>
-                          {club.clubName}
+                        <option key={club?.id} value={club?._id}>
+                          {club?.clubName}
                         </option>
                       ))
                   : ""}
@@ -131,8 +131,8 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                   DATE
                 </label>
                 <input
-                  min={tournament ? tournament.startingDate.split("T")[0] : ""}
-                  max={tournament ? tournament.endingDate.split("T")[0] : ""}
+                  min={tournament ? tournament?.startingDate.split("T")[0] : ""}
+                  max={tournament ? tournament?.endingDate.split("T")[0] : ""}
                   onChange={(e) => setDate(e.target.value)}
                   defaultValue={date}
                   className="m-1 p-1 text-center "
@@ -170,8 +170,8 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                   <option value="">SELECT WINNER</option>
                   {clubs.length
                     ? clubs.map((club) => (
-                        <option key={club.id} value={club.clubName}>
-                          {club.clubName}
+                        <option key={club?.id} value={club?.clubName}>
+                          {club?.clubName}
                         </option>
                       ))
                     : ""}
@@ -188,11 +188,11 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                 {clubs.length
                   ? clubs
                       .filter(
-                        (club) => club._id !== match?.teamTwo?._id || teamOne
+                        (club) => club?._id !== match?.teamTwo?._id || teamOne
                       )
                       .map((club) => (
-                        <option key={club.id} value={club._id}>
-                          {club.clubName}
+                        <option key={club?.id} value={club?._id}>
+                          {club?.clubName}
                         </option>
                       ))
                   : ""}
@@ -240,8 +240,8 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
                   <option value="">SELECT WINNER</option>
                   {clubs.length
                     ? clubs.map((club) => (
-                        <option key={club.id} value={club.clubName}>
-                          {club.clubName}
+                        <option key={club?.id} value={club?.clubName}>
+                          {club?.clubName}
                         </option>
                       ))
                     : ""}
@@ -251,7 +251,7 @@ function MatchForm({match, clubs,tournament,id,setMatches,setChange }) {
           <div className="flex justify-center col-span-12">
             <button
             type="button"
-              onClick={(e) => deleteGame(match._id)}
+              onClick={(e) => deleteGame(match?._id)}
               className="font-bold mr-1 text-white text-lg text-center bg-red-900 w-[7rem] md:h-[2rem] rounded-sm"
             >
               DELETE
