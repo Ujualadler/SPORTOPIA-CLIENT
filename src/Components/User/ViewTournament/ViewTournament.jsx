@@ -37,6 +37,7 @@ function ViewTournament() {
           setTournamentData(res.data.joined);
           setJoin(res.data.status);
         }
+        
       } catch (error) {
         console.log(error);
         navigate('/error')

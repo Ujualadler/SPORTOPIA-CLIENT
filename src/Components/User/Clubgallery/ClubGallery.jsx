@@ -3,6 +3,8 @@ import UserAxios from "../../../Axios/userAxios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { ClipLoader } from "react-spinners";
+
 
 function ClubGallery() {
   const userAxios = UserAxios();
@@ -10,6 +12,7 @@ function ClubGallery() {
   const [content, setContent] = useState(null);
   const [file, setFile] = useState("");
   const [state, setState] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [gallery, setGallery] = useState("");
   const img = useRef();
 

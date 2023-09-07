@@ -9,6 +9,7 @@ const Bookinghistory = () => {
 
   const [details, setDetails] = useState();
   const [review, setReview] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedTurfId, setSelectedTurfId] = useState(false);
 
   useEffect(() => {

@@ -3,11 +3,13 @@ import Useraxios from "../../../Axios/userAxios";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 function ClubList() {
   const userAxios = Useraxios();
   const [clubData, setClubData] = useState([]);
   const [user, setUser] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState(false);
   const [SearchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
@@ -21,20 +23,23 @@ function ClubList() {
       }
     } catch (error) {
       console.log(error);
-      navigate('/error')
+      navigate("/error");
     }
   };
 
   useEffect(() => {
+    setLoading(true);
+
     userAxios
       .get("/getClubs")
       .then((response) => {
         console.log(response.data);
         setClubData(response.data.result);
+        setLoading(false); // Set loading to false after the API call completes
       })
       .catch((err) => {
         console.log(err);
-        navigate('/error')
+        navigate("/error");
       });
   }, [status]);
   return (
@@ -62,7 +67,11 @@ function ClubList() {
           </div>
         </div>
       </div>
-      {clubData.length ? (
+      {loading ? (
+        <div className="flex justify-center mt-40 h-80">
+          <ClipLoader color="#ffffff" loading={loading} size={150} />
+        </div>
+      ) : clubData.length ? (
         clubData
           .filter((club) =>
             club.clubName.toLowerCase().includes(SearchInput.toLowerCase())

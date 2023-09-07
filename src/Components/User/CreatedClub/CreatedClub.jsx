@@ -2,28 +2,33 @@ import React from "react";
 import Useraxios from "../../../Axios/userAxios";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 
 function CreatedClubs() {
   const userAxios = Useraxios();
   const [clubData, setClubData] = useState([]);
   const [SearchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  
+
   const clubHome = async (id) => {
-    navigate(`/clubHome/${id}`)
+    navigate(`/clubHome/${id}`);
   };
 
   useEffect(() => {
+    setLoading(true);
+
     userAxios
       .get("/createdClubs")
       .then((response) => {
         setClubData(response.data.result);
-        console.log(response.data.status)
+        setLoading(false); // Set loading to false after the API call completes
+        console.log(response.data.status);
       })
       .catch((err) => {
         console.log(err);
-        navigate('/error')
+        navigate("/error");
       });
   }, []);
   return (
@@ -44,55 +49,59 @@ function CreatedClubs() {
           </div>
         </div>
       </div>
-      {clubData.length!=0?clubData
-        .filter((club) =>
-          club.clubName.toLowerCase().includes(SearchInput.toLowerCase())
-        )
-        .map((result) => {
-          return (
-            <div className="container flex flex-col items-center md:flex-row md:justify-around  bg-gray-900 bg-opacity-60 mt-7 ml-auto mr-auto rounded-md mb-7 border border-black">
-              <div className="mb-auto mt-auto flex">
-                <div className="bg-gradient-to-r from-gray-800 to-gray-400  w-[10rem] h-[10rem] mt-3 md:m-2 flex justify-center">
-                  <img
-                    className="w-[6rem] h-[6rem] mb-auto mt-auto"
-                    src={result.logo}
-                  />
+      {loading ? (
+        <div className="flex justify-center mt-40 h-80">
+          <ClipLoader color="#ffffff" loading={loading} size={150} />
+        </div>
+      ) : clubData.length != 0 ? (
+        clubData
+          .filter((club) =>
+            club.clubName.toLowerCase().includes(SearchInput.toLowerCase())
+          )
+          .map((result) => {
+            return (
+              <div className="container flex flex-col items-center md:flex-row md:justify-around  bg-gray-900 bg-opacity-60 mt-7 ml-auto mr-auto rounded-md mb-7 border border-black">
+                <div className="mb-auto mt-auto flex">
+                  <div className="bg-gradient-to-r from-gray-800 to-gray-400  w-[10rem] h-[10rem] mt-3 md:m-2 flex justify-center">
+                    <img
+                      className="w-[6rem] h-[6rem] mb-auto mt-auto"
+                      src={result.logo}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <ul className="mt-4 mb-4 ">
+                    <h2 className="font-bold mt-4 text-center text-lg text-white trackinge-wide">
+                      {result.clubName}
+                    </h2>
+                    <li className="font-semibold mt-3 text-center  text-gray-400">
+                      ADMIN:{result.admin.name}
+                    </li>
+                    <li className="font-semibold mt-3 text-center text-gray-400">
+                      TYPE:{result.clubType}
+                    </li>
+                  </ul>
+                </div>
+                <div className="my-auto">
+                  <button
+                    onClick={() => {
+                      clubHome(result._id);
+                    }}
+                    className="bg-black w-[7rem] mb-3 h-[2rem] hover:bg-slate-700 rounded-md text-white md:font-bold "
+                  >
+                    VIEW
+                  </button>
                 </div>
               </div>
-              <div className="flex items-center">
-                <ul className="mt-4 mb-4 ">
-                  <h2 className="font-bold mt-4 text-center text-lg text-white trackinge-wide">
-                    {result.clubName}
-                  </h2>
-                  <li className="font-semibold mt-3 text-center  text-gray-400">
-                    ADMIN:{result.admin.name}
-                  </li>
-                  <li className="font-semibold mt-3 text-center text-gray-400">
-                    TYPE:{result.clubType}
-                  </li>
-                </ul>
-              </div>
-              <div className="my-auto">
-               <button
-                  onClick={() => {
-                    clubHome(result._id);
-                  }}
-                  className="bg-black w-[7rem] mb-3 h-[2rem] hover:bg-slate-700 rounded-md text-white md:font-bold "
-                >
-                  VIEW
-                </button>
-                
-              </div>
-            </div>
-          );
-        }):
-        (
-            <div className="flex justify-center mt-36 h-screen">
-              <div className="mt-8 mx-11 hidden md:block text-white md:text-xl font-bold tracking-wide">
-                NO CLUBS AVAILABLE
-              </div>
-            </div>
-          )}
+            );
+          })
+      ) : (
+        <div className="flex justify-center mt-36 h-screen">
+          <div className="mt-8 mx-11 hidden md:block text-white md:text-xl font-bold tracking-wide">
+            NO CLUBS AVAILABLE
+          </div>
+        </div>
+      )}
     </>
   );
 }
