@@ -1,13 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
-import userAxios from "../../../Axios/userAxios";
+import UserAxios from "../../../Axios/userAxios";
 import { useParams } from 'react-router-dom'
 
 function VerifyMail() {
+  const userAxios=UserAxios()
     const { user_id } = useParams();
     useEffect(()=>{
+      
         userAxios.post('/verify',{user_id}).then((res)=>{
+          console.log(user_id);
             console.log(res.data.status)
             if(res.data.status===true){
                 console.log("success")
