@@ -48,9 +48,9 @@ const AddReview = (id) => {
   };
 
   return (
-    <div className="py-8 px-4 md:px-3 2xl:px-0 2xl:container 2xl:mx-auto flex justify-center items-center ">
+    <div className="py-8  2xl:px-0 2xl:container 2xl:mx-auto flex justify-center items-center ">
       <div className="flex flex-col w-full space-y-3">
-        <div className="flex justify-start items-start flex-col bg-gray-900 bg-opacity-60 p-6 border border-gray-700 shadow-2xl rounded-lg">
+        <div className="flex justify-start items-start flex-col bg-gray-900 bg-opacity-60 p-6 border border-gray-700 shadow-2xl sm:rounded-lg">
           <div className="flex flex-col md:flex-row justify-between w-full">
             <div className="flex flex-row justify-between items-start">
               <button onClick={() => setMenu(!menu)} className="ml-4 md:hidden">

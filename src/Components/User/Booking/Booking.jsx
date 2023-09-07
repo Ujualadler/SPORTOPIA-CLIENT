@@ -200,7 +200,7 @@ function Booking() {
               </button>
             </div>
           </div>
-        )):( <div className="flex items-center justify-center font-extrabold text-black text-3xl text-center">No turfs found near the searched location.</div>)}
+        )):( <div className="flex items-center justify-center font-extrabold text-black text-3xl text-center">NO TURVES FOUND.</div>)}
       </div>
     </div>
       

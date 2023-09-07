@@ -159,7 +159,7 @@ function ViewTournament() {
             <div className="md:col-span-5 col-span-12">
               <img
                 className="m-1 w-full h-fit"
-                src="https://i.pinimg.com/736x/a9/d0/01/a9d0016f19985400b824c1984254e473.jpg"
+                src="https://img.freepik.com/premium-photo/high-tech-trophy-generate-ai_98402-5455.jpg"
                 alt=""
               />
             </div>
@@ -176,7 +176,7 @@ function ViewTournament() {
                       alt=""
                     />
                     <div className="flex justify-center items-center">
-                      <h3 className="text-white md:text-2xl text-lg text-center ml-3 font-bold">
+                      <h3 className="text-white md:text-2xl xl text-lg text-center ml-3 font-bold">
                         {winners?.first?.clubName}
                       </h3>
                     </div>

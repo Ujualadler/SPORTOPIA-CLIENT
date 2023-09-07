@@ -46,7 +46,7 @@ function ClubUserHome() {
         </div>
         <div class="md:order-first bg-gray-900 bg-opacity-70 p-5 md:p-12  flex justify-end items-center">
           <div class="max-w-md md:mr-10">
-            <h2 class="font-display font-bold text-2xl md:text-2xl lg:text-3xl mb-6">
+            <h2 class="font-display font-bold text-2xl text-white md:text-2xl lg:text-3xl mb-6">
               {clubData.clubName}
             </h2>
             <div class=" md:w-96  h-2 bg-black mb-4"></div>
