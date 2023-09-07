@@ -49,6 +49,10 @@ function ChatRoom() {
     const newSocket = io("https://api.spotopia.site/chat");
     setSocket(newSocket);
 
+    newSocket.on("error",(err)=>{
+      console.log(err);
+    })
+
     return () => {
       if (newSocket) newSocket.disconnect();
     };
