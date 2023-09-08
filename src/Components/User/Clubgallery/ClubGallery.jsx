@@ -23,7 +23,8 @@ function ClubGallery() {
       const getGallery = async () => {
         const response = await userAxios.post("getGallery", { clubId });
         if (response) {
-          setGallery(response.data.gallery);
+          setGallery(response?.data?.gallery);
+          setLoading(false)
         }
       };
       getGallery();
@@ -50,7 +51,6 @@ function ClubGallery() {
       return;
     }
     try {
-      setLoading(true);
       const response = await userAxios.post(
         "/clubGalleryAdd",
         { content: content, file: file, clubId: clubId },
@@ -58,12 +58,7 @@ function ClubGallery() {
       );
       if (response.data.status === true) {
         toast.success("Saved Successfully");
-        console.log(response.data.gallery + "data");
         setGallery(response.data.gallery);
-        setLoading(false); // Set loading to false after the API call completes
-        setFile("");
-        setContent(null);
-        setState(true);
       }
     } catch (error) {
       console.log(error);
@@ -72,8 +67,6 @@ function ClubGallery() {
 
   const removeGallery = async (id) => {
     try {
-      setLoading(true);
-
       const response = await userAxios.post("/removeGallery", { clubId, id });
       Swal.fire({
         title: "Are you sure?",
@@ -87,7 +80,6 @@ function ClubGallery() {
         if (result.isConfirmed == true) {
           Swal.fire("Successfully removed");
           setGallery(response.data.gallery);
-          setLoading(false);
         }
       });
     } catch (error) {
@@ -95,7 +87,6 @@ function ClubGallery() {
     }
   };
 
-  console.log(gallery + "gallery");
 
   return (
     <>
@@ -108,7 +99,7 @@ function ClubGallery() {
         onSubmit={uploadGallery}
         className="bg-gray-900 m-2 p-2 bg-opacity-60  grid grid-cols-1 md:grid-cols-3 gap-4"
       >
-        <div className="mx-auto w-full px-4 md:px-8  col-span-1">
+        <div className="mx-auto w-full sm:px-4 col-span-1">
           <div className="col-span-1 md:col-span-1/3">
             {/* image - start */}
             <a
@@ -144,7 +135,7 @@ function ClubGallery() {
             />
           </div>
           <div className="mt-2 ">
-            <button className="w-full h-12 bg-black hover:bg-white hover:text-black font-bold rounded-md md:w-[99%]">
+            <button className="w-full h-12 bg-black text-white hover:bg-white hover:text-black font-bold rounded-md md:w-[99%]">
               SAVE
             </button>
           </div>
@@ -154,24 +145,26 @@ function ClubGallery() {
             <div className="flex justify-center mt-40 h-80">
               <ClipLoader color="#ffffff" loading={loading} size={150} />
             </div>
-          ) : gallery.length ? (
-            gallery.map((data) => (
+          ) :gallery.length ? (
+            gallery?.map((data) => (
               <div
                 key={data._id}
                 className="bg-black bg-opacity-60 w-100 h-28 flex justify-between p-2 rounded-xl mb-2"
               >
                 <img
-                  src={data.image} // Use the actual image URL from the data
+                  src={data?.image} // Use the actual image URL from the data
                   loading="lazy"
                   alt="Photo by Minh Pham"
                   className="w-24 h-24"
                 />
-                <p className="text-white pl-2">{data.content}</p>
+                <div className="flex justify-center items-center">
+                <p className="text-white pl-2">{data?.content}</p>
+                </div>
                 <button
-                  key={data._id}
+                  key={data?._id}
                   onClick={() => removeGallery(data._id)}
                   type="submit"
-                  className="w-32 ml-2 bg-black p-2 hover:bg-gray-900"
+                  className="w-32 ml-2 bg-black p-2 text-white hover:bg-gray-900"
                 >
                   REMOVE
                 </button>
@@ -179,7 +172,7 @@ function ClubGallery() {
             ))
           ) : (
             <div className="flex justify-center mt-36 h-screen">
-              <div className="text-xl font-bold">EMPTY GALLERY</div>
+              <div className="text-xl text-white font-bold">EMPTY GALLERY</div>
             </div>
           )}
         </div>

@@ -13,7 +13,7 @@ function ViewFixture() {
       try {
         const response = await userAxios.get(`findMatches?id=${id}`);
         if (response.data) {
-          setMatches(response.data.matches);
+          setMatches(response?.data?.matches);
         }
       } catch (error) {
         console.error(error);
@@ -36,8 +36,8 @@ function ViewFixture() {
               <div className="md:col-span-4 col-span-12 bg-black h-40 bg-opacity-40 m-3 grid grid-cols-12">
               <div className="col-span-4  m-4 flex flex-col justify-center items-center">
                 <div className="flex flex-col justify-center items-center">
-                  <img className="rounded-full w-20 h-20" src={match?.teamOne.logo} alt="" />
-                  <h3 className="text-center text-sm text-white font-semibold mt-3 ">{match?.teamOne.clubName}</h3>
+                  <img className="rounded-full w-20 h-20" src={match?.teamOne?.logo} alt="" />
+                  <h3 className="text-center text-sm text-white font-semibold mt-3 ">{match?.teamOne?.clubName}</h3>
                   </div>
               </div>
               <div className="col-span-4 flex flex-col justify-center items-center">
@@ -49,14 +49,14 @@ function ViewFixture() {
                   <span className="text-2xl mx-2 font-bold">:</span>
                   <span className="bg-gray-800 rounded-sm text-center font-bold text-xl pt-1 h-10 w-16">{match?.scoreTwo}</span>
                   </div>:<><h3 className="text-red-600 text-2xl mb-2 mt-4">VS</h3>
-                  <h3>{new Date(`1970-01-01T${match.time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</h3></>}
+                  <h3>{new Date(`1970-01-01T${match?.time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</h3></>}
                   <h3>{match ? match.date.split("T")[0] : ""}</h3>
                 </div>
               </div>
               <div className="col-span-4 m-4 flex flex-col justify-center items-center">
                 <div className="flex flex-col justify-center items-center">
-                  <img className="rounded-full w-20 h-20" src={match?.teamTwo.logo} alt="" />
-                  <h3 className="text-center text-white text-sm font-semibold mt-3 ">{match?.teamTwo.clubName}</h3>
+                  <img className="rounded-full w-20 h-20" src={match?.teamTwo?.logo} alt="" />
+                  <h3 className="text-center text-white text-sm font-semibold mt-3 ">{match?.teamTwo?.clubName}</h3>
                   </div>
               </div>
             </div>
