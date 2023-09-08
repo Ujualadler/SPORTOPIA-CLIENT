@@ -4,7 +4,7 @@ const CustomCheckbox = ({ checked, onChange, disabled }) => {
   
     return (
       <div
-        className={`cursor-pointer checkbox border rounded md:w-6 md:h-6 w-4 h-4 flex items-center justify-center mr-2 ${disabled ? 'border-gray-700 cursor-not-allowed' : 'border-blue-700'}`}
+        className={`cursor-pointer checkbox border rounded w-6 h-6  flex items-center justify-center mr-2 ${disabled ? 'border-gray-700 cursor-not-allowed' : 'border-blue-700'}`}
         onClick={()=> {
           if(!disabled)
             onChange()

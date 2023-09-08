@@ -276,7 +276,7 @@ const TurfBooking = () => {
         ) : (
           ""
         )}
-        <div className="flex flex-wrap -mx-3 ">
+        <div className="flex flex-wrap -mx-3 mt-2">
           <div className="w-full  md:w-1/2  bg-gray-900 bg-opacity-60 rounded-lg shadow-2xl">
             <div className="sticky top-0 z-50 overflow-hidden m-2">
               <div className="relative mb-6 lg:mb-10 lg:h-2/4">
@@ -287,7 +287,7 @@ const TurfBooking = () => {
                       imageRef.current.click();
                     }}
                     alt=""
-                    className="object-cover w-full h-40  md:h-96  rounded-lg"
+                    className="object-cover w-full h-64  md:h-96  rounded-lg"
                   />
                 ) : (
                   <img
@@ -296,15 +296,15 @@ const TurfBooking = () => {
                       imageRef.current.click();
                     }}
                     alt=""
-                    className="object-cover w-full h-40  md:h-96 mt-4 rounded-lg"
+                    className="object-cover w-full h-64  md:h-96 mt-4 rounded-lg"
                   />
                 )}
               </div>
-              <div className="flex-wrap shadow-2xl border bg-black bg-opacity-60 rounded-2xl border-gray-900 flex   mr-2 ml-2">
+              <div className="flex-wrap shadow-2xl border bg-black bg-opacity-60 rounded-md border-gray-900 flex ">
                 {data
                   ? data.photos.map((img) => {
                       return (
-                        <div className="p-2 w-3/12 " key={img._id}>
+                        <div className="p-1 w-3/12 " key={img._id}>
                           <a
                             onClick={() => setSelectedImage(img)}
                             className="block border border-transparent dark:border-transparent dark:hover:border-red-300 hover:border-red-300"
@@ -313,7 +313,7 @@ const TurfBooking = () => {
                               src={img || ""}
                               alt=""
                               ref={imageRef}
-                              className="object-cover h-20 w-16 md:w-full md:h-20 rounded-md"
+                              className="object-cover h-20 w-20 md:w-full md:h-20 rounded-md"
                             />
                           </a>
                         </div>
@@ -441,7 +441,7 @@ const TurfBooking = () => {
                     defaultValue={today}
                   />
                 </p>
-                <div className=" mb-8 text-md font-bold font-poppins bg-gray-900 text-gray-100 ">
+                <div className=" mb-8 text-md font-bold font-poppins  bg-gray-900 text-gray-100 ">
                   <div
                     className="self-start  p-1 font-semibold text-center w-auto mb-4 dark:text-gray-100 cursor-pointer"
                     onClick={toggleSlots}
@@ -451,7 +451,7 @@ const TurfBooking = () => {
                     </font>
                   </div>
                   {showSlots && (
-                    <div className="flex flex-wrap text-gray-300">
+                    <div className="flex  sm:justify-between  sm:ml-5 ml-12 flex-wrap text-gray-300 overflow-y-scroll   ">
                       {timeSlots.map((slot, index) => {
                         const bookedSlot = data.turfBookings.find(
                           (booking) =>
@@ -472,12 +472,10 @@ const TurfBooking = () => {
                         });
 
                         const isSlotBooked = bookedSlot !== undefined;
-
-                        console.log(onBookingSlot, 'onBooking ------------')
                         return (
                           <div
                             key={index}
-                            className={`flex w-1/2 items-center mb-2 ${
+                            className={`flex sm:w-1/2 items-center mb-2 ${
                               isSlotBooked ? "booked" : ""
                             }`}
                           >
@@ -492,7 +490,7 @@ const TurfBooking = () => {
                                 }
                               }}
                             />
-                            <label className="text-sm md:text-lg">{`${convertTo12HourFormat(
+                            <label className="text-md sm:text-lg">{`${convertTo12HourFormat(
                               slot.start
                             )} to ${convertTo12HourFormat(slot.end)}`}</label>
                           </div>
