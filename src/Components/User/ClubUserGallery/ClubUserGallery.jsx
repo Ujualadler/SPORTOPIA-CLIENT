@@ -15,7 +15,6 @@ function ClubUserGallery() {
       const getGallery = async () => {
         const response = await userAxios.post("clubUserDetails", { clubId });
         if (response) {
-          console.log(response.data.gallery);
           setGallery(response.data.gallery);
           setLoading(false); // Set loading to false after the API call completes
         }
@@ -57,7 +56,7 @@ function ClubUserGallery() {
                   {/* image - end */}
                 </div>
                 <div className="mt-2 flex items-center justify-center ">
-                  <div className="w-full h-14 bg-black text-center flex items-center justify-center  bg-opacity-70 rounded-md md:w-[99%]">
+                  <div className="w-full h-14 bg-black text-center text-white flex items-center justify-center  bg-opacity-70 rounded-md md:w-[99%]">
                     {value.content}
                   </div>
                 </div>
