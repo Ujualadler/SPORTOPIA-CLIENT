@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { ClipLoader } from "react-spinners";
 
-
 function ClubGallery() {
   const userAxios = UserAxios();
   const clubId = useSelector((state) => state.Club.clubId);
@@ -24,7 +23,7 @@ function ClubGallery() {
         const response = await userAxios.post("getGallery", { clubId });
         if (response) {
           setGallery(response?.data?.gallery);
-          setLoading(false)
+          setLoading(false);
         }
       };
       getGallery();
@@ -59,6 +58,7 @@ function ClubGallery() {
       if (response.data.status === true) {
         toast.success("Saved Successfully");
         setGallery(response.data.gallery);
+        setState(true)
       }
     } catch (error) {
       console.log(error);
@@ -80,6 +80,7 @@ function ClubGallery() {
         if (result.isConfirmed == true) {
           Swal.fire("Successfully removed");
           setGallery(response.data.gallery);
+          setState(true)
         }
       });
     } catch (error) {
@@ -87,19 +88,18 @@ function ClubGallery() {
     }
   };
 
-
   return (
     <>
-      <div className="flex justify-center md:justify-start m-5 gap-12">
+      <div className="flex justify-center md:justify-start m-4 ">
         <h2 className="text-xl font-bold text-gray-200 lg:text-2xl">
           CLUB GALLERY
         </h2>
       </div>
       <form
         onSubmit={uploadGallery}
-        className="bg-gray-900 m-2 p-2 bg-opacity-60  grid grid-cols-1 md:grid-cols-3 gap-4"
+        className="bg-gray-900 m-2 p-2 bg-opacity-60  grid grid-cols-1 md:grid-cols-3 sm:gap-4"
       >
-        <div className="mx-auto w-full sm:px-4 col-span-1">
+        <div className="mx-auto w-full  col-span-1">
           <div className="col-span-1 md:col-span-1/3">
             {/* image - start */}
             <a
@@ -140,31 +140,31 @@ function ClubGallery() {
             </button>
           </div>
         </div>
-        <div className="col-span-2 gallery overflow-scroll h-[360px]">
+        <div className="col-span-2 mt-4 sm:mt-0 gallery overflow-scroll h-[360px]">
           {loading ? (
             <div className="flex justify-center mt-40 h-80">
               <ClipLoader color="#ffffff" loading={loading} size={150} />
             </div>
-          ) :gallery.length ? (
+          ) : gallery.length ? (
             gallery?.map((data) => (
               <div
                 key={data._id}
-                className="bg-black bg-opacity-60 w-100 h-28 flex justify-between p-2 rounded-xl mb-2"
+                className="bg-black bg-opacity-60 w-100  md:28 h-18 flex justify-between p-2 rounded-xl mb-2"
               >
                 <img
                   src={data?.image} // Use the actual image URL from the data
                   loading="lazy"
                   alt="Photo by Minh Pham"
-                  className="w-24 h-24"
+                  className="sm:w-24 sm:h-24 w-16 h-16"
                 />
                 <div className="flex justify-center items-center">
-                <p className="text-white pl-2">{data?.content}</p>
+                  <p className="text-white pl-2">{data?.content}</p>
                 </div>
                 <button
                   key={data?._id}
                   onClick={() => removeGallery(data._id)}
                   type="submit"
-                  className="w-32 ml-2 bg-black p-2 text-white hover:bg-gray-900"
+                  className="sm:w-32 w-18 ml-2 bg-black p-2 text-white hover:bg-gray-900"
                 >
                   REMOVE
                 </button>
