@@ -1,5 +1,5 @@
 import React, { useEffect, useId, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {toast} from "react-toastify";
 import moment from "moment-timezone";
 import UserAxios from "../../../Axios/userAxios";
@@ -20,6 +20,8 @@ const TurfBooking = () => {
 
   const [showDetails, setShowDetails] = useState(false);
   const [showSlots, setShowSlots] = useState(false);
+  const navigate=useNavigate()
+
 
   const [onBooking, setOnBooking] = useState([])
 
