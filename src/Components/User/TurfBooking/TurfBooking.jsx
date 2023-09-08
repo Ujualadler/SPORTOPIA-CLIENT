@@ -214,7 +214,7 @@ const TurfBooking = () => {
 
 
   useEffect(() => {
-    const newSocket = io("http://api.spotopia.site/booking");
+    const newSocket = io("https://api.spotopia.site/booking");
     if (newSocket) console.log('connected first')
     setSocket(newSocket);
 
