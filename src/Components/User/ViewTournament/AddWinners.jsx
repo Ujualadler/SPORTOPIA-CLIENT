@@ -91,7 +91,20 @@ function AddWinners({ show, clubs, id }) {
       </div>
 
       <div className=" flex flex-col justify-center m-4 md:m-0 items-center sm:h-screen h-[500px]">
-        <form
+      {winner.length?
+      <>
+       <div className="text-center text-">DELETE THIS WINNER TO ADD NEW ONE</div>
+        <div className=" flex mt-5 flex-col text-white sm:w-96 w-80 bg-black bg-opacity-40 ">
+        <div className="m-1 p-3 text-center bg-gray-950 font-semibold  rounded-sm">
+        CHAMPION-  {winner[0]?.first.clubName}
+        </div>
+        <div className="m-1  p-3 text-center font-semibold bg-gray-950 rounded-sm">
+          RUNNER UP- {winner[0]?.second.clubName}
+        </div>
+        <button onClick={()=>deleteWinners(winner[0]._id)} className="m-1  text-center text-white font-semibold col-span-1 bg-red-800 p-3 hover:bg-red-500">
+          REMOVE
+        </button>
+      </div></>:<form
           onSubmit={champions}
           className=" flex flex-col sm:w-96 w-80 bg-black bg-opacity-40 "
         >
@@ -133,20 +146,7 @@ function AddWinners({ show, clubs, id }) {
           >
             SAVE
           </button>
-        </form>
-        {winner.length?
-        <div className=" flex mt-5 flex-col text-white sm:w-96 w-80 bg-black bg-opacity-40 ">
-        <div className="m-1 p-3 text-center bg-gray-950 font-semibold  rounded-sm">
-        CHAMPION-  {winner[0]?.first.clubName}
-        </div>
-        <div className="m-1  p-3 text-center font-semibold bg-gray-950 rounded-sm">
-          RUNNER UP- {winner[0]?.second.clubName}
-        </div>
-        <button onClick={()=>deleteWinners(winner[0]._id)} className="m-1  text-center text-white font-semibold col-span-1 bg-red-800 p-3 hover:bg-red-500">
-          REMOVE
-        </button>
-      </div>:''}
-        
+        </form>}
       </div>
     </>
   );
