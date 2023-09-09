@@ -57,10 +57,8 @@ const Bookinghistory = () => {
           </div>
           <AddReview turf={selectedTurfId} />
         </div>
-      ) : (
-        ""
-      )}
-      {loading ? (
+      ) 
+      :loading ? (
         <div className="flex justify-center mt-40 h-80">
           <ClipLoader color="#ffffff" loading={loading} size={150} />
         </div>
