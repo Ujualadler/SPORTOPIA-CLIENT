@@ -1,15 +1,13 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import moment from "moment-timezone";
 import UserAxios from "../../../Axios/userAxios";
 import CustomCheckbox from "../../Utilities/CustomCheckBox";
 import ViewMap from "../../Utilities/Maps";
 import Review from "../Review/Review";
 import { io } from "socket.io-client";
-import {
- faCaretDown
-} from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 
 const TurfBooking = () => {
@@ -20,10 +18,9 @@ const TurfBooking = () => {
 
   const [showDetails, setShowDetails] = useState(false);
   const [showSlots, setShowSlots] = useState(false);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
-
-  const [onBooking, setOnBooking] = useState([])
+  const [onBooking, setOnBooking] = useState([]);
 
   const toggleDetails = () => {
     setShowDetails((prevShowDetails) => !prevShowDetails);
@@ -34,7 +31,10 @@ const TurfBooking = () => {
   };
 
   const today = moment().tz("Asia/Kolkata").format("YYYY-MM-DD");
-  const maxDate = moment().tz("Asia/Kolkata").add(2,"days").format("YYYY-MM-DD");
+  const maxDate = moment()
+    .tz("Asia/Kolkata")
+    .add(2, "days")
+    .format("YYYY-MM-DD");
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [data, setData] = useState("");
@@ -45,11 +45,11 @@ const TurfBooking = () => {
   const [totalAdvance, setTotalAdvance] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [mapView, setMapView] = useState(false);
-  const [reviewData, setReviewData] = useState('');
+  const [reviewData, setReviewData] = useState("");
 
-  const [socket, setSocket] = useState(null)
+  const [socket, setSocket] = useState(null);
 
-  const userId=useSelector((state)=>state.User.UserData._id)
+  const userId = useSelector((state) => state.User.UserData._id);
 
   useEffect(() => {
     userAxios
@@ -65,7 +65,7 @@ const TurfBooking = () => {
       })
       .catch((err) => {
         console.log(err);
-        navigate('/error')
+        navigate("/error");
       });
   }, []);
 
@@ -103,11 +103,11 @@ const TurfBooking = () => {
     const fetchReviews = async () => {
       try {
         const response = await userAxios.get(`/reviews?id=${id}`);
-        const review=response.data
-        setReviewData(review)
+        const review = response.data;
+        setReviewData(review);
       } catch (error) {
         console.log(error);
-        navigate('/error')
+        navigate("/error");
       }
     };
     fetchReviews();
@@ -140,22 +140,22 @@ const TurfBooking = () => {
     setTotalAdvance(totalAdvanceAmount);
     setTotalAmount(totalAmount);
   }, [data.advance, selectedSlots, totalAmount]);
- const activate=useRef(false)
- 
+  const activate = useRef(false);
+
   const handleSelectSlot = (slot) => {
     if (selectedSlots.includes(slot)) {
       setSelectedSlots((prevSlots) => prevSlots.filter((s) => s !== slot));
-      
-      socket.emit('removeBooking', id, date, slot, userId)
-      clearTimeout(activate.current) 
+
+      socket.emit("removeBooking", id, date, slot, userId);
+      clearTimeout(activate.current);
     } else {
       setSelectedSlots((prevSlots) => [...prevSlots, slot]);
-      activate.current = setTimeout(()=>{
+      activate.current = setTimeout(() => {
         setSelectedSlots((prevSlots) => prevSlots.filter((s) => s !== slot));
-        toast.error('Slot deactivated due to exceeded time.')
-        socket.emit('removeBooking', id, date, slot, userId)
-      }, 60000)
-      socket.emit('updateBooking', id, date, slot, userId)
+        toast.error("Slot deactivated due to exceeded time.");
+        socket.emit("removeBooking", id, date, slot, userId);
+      }, 60000);
+      socket.emit("updateBooking", id, date, slot, userId);
     }
   };
 
@@ -166,7 +166,7 @@ const TurfBooking = () => {
     }
 
     try {
-      const response = await userAxios.post("/create-checkout-session", {
+      const response = await userAxios.post("/createCheckout", {
         turfId: id,
         date,
         selectedSlots,
@@ -177,13 +177,13 @@ const TurfBooking = () => {
       if (response.data.error) {
         toast.error(`${response.data.error}[${response.data.slots}]`);
       }
-      if (response.data.url) {
-        window.location.href = response.data.url;
-      }
+      // if (response.data.url) {
+      //   window.location.href = response.data.url;
+      // }
 
       console.log(response);
     } catch (error) {
-      navigate('/error')
+      navigate("/error");
       toast.error("Payment failed. Please try again.");
     }
   };
@@ -203,9 +203,8 @@ const TurfBooking = () => {
           setUserLongitude(position.coords.longitude);
         },
         (error) => {
-          navigate('/error')
-	       toast.error('Please allow location permission')
-
+          navigate("/error");
+          toast.error("Please allow location permission");
         }
       );
     } else {
@@ -214,16 +213,16 @@ const TurfBooking = () => {
     }
   }, []);
 
-
   useEffect(() => {
     const newSocket = io("https://api.spotopia.site/booking");
-    if (newSocket) console.log('connected first')
+    if (newSocket) console.log("connected first");
     setSocket(newSocket);
 
     return () => {
-      if (newSocket) newSocket.disconnect(()=>{
-      socket.emit('removeBooking', id, date, slot, userId)
-      });
+      if (newSocket)
+        newSocket.disconnect(() => {
+          socket.emit("removeBooking", id, date, slot, userId);
+        });
     };
   }, [id]);
 
@@ -233,7 +232,7 @@ const TurfBooking = () => {
 
       socket.on("message", (receivedClubId, onBooking) => {
         if (receivedClubId === id) {
-          setOnBooking([onBooking])
+          setOnBooking([onBooking]);
         }
       });
       socket.on("error", (err) => {
@@ -249,7 +248,6 @@ const TurfBooking = () => {
       setMapView(false);
     }
   };
- 
 
   return (
     <section className="overflow-hidden  font-poppins   m-1 ">
@@ -272,8 +270,8 @@ const TurfBooking = () => {
             turfLatitude={data.latitude}
             userLongitude={userLongitude}
             userLatitude={userLatitude}
-			turfName={data.turfName}
-			turfLogo={data.logo}
+            turfName={data.turfName}
+            turfLogo={data.logo}
           />
         ) : (
           ""
@@ -329,27 +327,29 @@ const TurfBooking = () => {
             <div className="lg:pl-20 mt-10 mb-4">
               <div className="mb-8 mt-1">
                 <div className="flex mb-4 mr-3 w-full">
-                <font className="inline-block w-2/5 text-gray-100 mr-3 text-lg font-bold font-poppins">
+                  <font className="inline-block w-2/5 text-gray-100 mr-3 text-lg font-bold font-poppins">
                     RATING
                   </font>
-                {[1, 2, 3, 4, 5].map((star) => (
-              <svg
-                key={star}
-                className={`w-6 h-6 cursor-pointer  ${
-                  star <=reviewData.totalRating? "text-yellow-500" : "text-gray-100"
-                }`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" 
-                  clipRule="evenodd"
-                />
-              </svg>
-            ))}
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <svg
+                      key={star}
+                      className={`w-6 h-6 cursor-pointer  ${
+                        star <= reviewData.totalRating
+                          ? "text-yellow-500"
+                          : "text-gray-100"
+                      }`}
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  ))}
                 </div>
-          
+
                 <h2 className="w-full flex text-md font-semibold mb-4 dark:text-gray-300">
                   <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                     TYPE
@@ -380,7 +380,8 @@ const TurfBooking = () => {
                     onClick={toggleDetails}
                   >
                     <font className="text-white text-center   pb-1 font-semibold font-poppins">
-                      {showDetails ? "CLOSE" : "ADDRESS"}<span icon={faCaretDown}></span>
+                      {showDetails ? "CLOSE" : "ADDRESS"}
+                      <span icon={faCaretDown}></span>
                     </font>
                   </div>
                   {showDetails && (
@@ -421,16 +422,13 @@ const TurfBooking = () => {
                 </p>
 
                 <p className="mb-4 text-md font-bold font-poppins  text-gray-100 dark:text-gray-100">
-                  <span className="mr-3 inline-block w-2/5">
-                    ADVANCE
-                  </span>
+                  <span className="mr-3 inline-block w-2/5">ADVANCE</span>
                   <span className="text-gray-300">
                     ₹{data ? data.advance : ""}
                   </span>
                   <span className="text-red-500 sm:ml-4 ml-1 sm:text-base text-sm">
-                      NONREFUNDABLE
+                    NONREFUNDABLE
                   </span>
-                  
                 </p>
                 <p className="mt-4 mb-4 text-md font-bold text-gray-800 font-poppins dark:text-gray-100">
                   <span className="inline-block w-2/5 mr-3">DATE</span>
@@ -466,10 +464,13 @@ const TurfBooking = () => {
                         let onBookingSlot = false;
                         onBooking.forEach((bookingObj) => {
                           if (bookingObj && bookingObj[date]) {
-                            bookingObj[date].forEach(item => {
-                              if(item.slot == `${slot.start}-${slot.end}` && item.user != userId)
+                            bookingObj[date].forEach((item) => {
+                              if (
+                                item.slot == `${slot.start}-${slot.end}` &&
+                                item.user != userId
+                              )
                                 onBookingSlot = true;
-                            })
+                            });
                           }
                         });
 
@@ -501,21 +502,24 @@ const TurfBooking = () => {
                     </div>
                   )}
                 </div>
-                {selectedSlots.length? <div className="font-poppins">
-                  <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
-                    <span className="mr-5">SLOTS</span>
-                    <span className="text-gray-400">{selectedSlots}</span>
+                {selectedSlots.length ? (
+                  <div className="font-poppins">
+                    <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
+                      <span className="mr-5">SLOTS</span>
+                      <span className="text-gray-400">{selectedSlots}</span>
+                    </div>
+                    <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
+                      <span className="mr-3">TOTAL ADVANCE</span>
+                      <span className="text-gray-400">₹{totalAdvance}</span>
+                    </div>
+                    <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
+                      <span className="mr-3">TOTAL AMOUNT</span>
+                      <span className="text-gray-400">₹{totalAmount}</span>
+                    </div>
                   </div>
-                  <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
-                    <span className="mr-3">TOTAL ADVANCE</span>
-                    <span className="text-gray-400" >₹{totalAdvance}</span>
-                  </div>
-                  <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
-                    <span className="mr-3">TOTAL AMOUNT</span>
-                    <span className="text-gray-400">₹{totalAmount}</span>
-                  </div>
-                </div>:''}
-               
+                ) : (
+                  ""
+                )}
               </div>
               <div className="flex flex-wrap items-center -mx-4">
                 <div className="w-full px-4 mb-4 lg:mb-0 lg:w-1/2">
@@ -532,7 +536,13 @@ const TurfBooking = () => {
           </div>
         </div>
       </div>
-      {reviewData.reviews? <Review review={reviewData}/>:<div className="flex justify-center mt-8"><h1 className="text-xl text-white font-bold">NO REVIEW AVAILABLE</h1></div> }
+      {reviewData.reviews ? (
+        <Review review={reviewData} />
+      ) : (
+        <div className="flex justify-center mt-8">
+          <h1 className="text-xl text-white font-bold">NO REVIEW AVAILABLE</h1>
+        </div>
+      )}
     </section>
   );
 };
