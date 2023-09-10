@@ -36,7 +36,7 @@ function ClubUserGallery() {
       <div className="bg-gray-900 m-2 p-2 bg-opacity-60  grid grid-cols-1 md:grid-cols-3 gap-4">
         {loading ? (
           <div className="flex justify-center mt-40 h-80">
-            <ClipLoader color="#ffffff" loading={loading} size={150} />
+            <ClipLoader color="#ffffff" loading={loading} size={70} />
           </div>
         ) : gallery.length ? (
           gallery.map((value) => {

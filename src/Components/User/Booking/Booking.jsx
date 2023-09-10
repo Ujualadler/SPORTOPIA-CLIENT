@@ -162,7 +162,7 @@ function Booking() {
         <div className="  pt-4 pb-4 mt-2">
           {loading ? (
             <div className="flex justify-center mt-40 h-80">
-              <ClipLoader color="#ffffff" loading={loading} size={150} />
+              <ClipLoader color="#ffffff" loading={loading} size={70} />
             </div>
           ) : nearbyTurfs.length > 0 ? (
             nearbyTurfs.map((result) => (

@@ -143,7 +143,7 @@ function ClubGallery() {
         <div className="col-span-2 mt-4 sm:mt-0 gallery overflow-scroll h-[360px]">
           {loading ? (
             <div className="flex justify-center mt-40 h-80">
-              <ClipLoader color="#ffffff" loading={loading} size={150} />
+              <ClipLoader color="#ffffff" loading={loading} size={70} />
             </div>
           ) : gallery.length ? (
             gallery?.map((data) => (

@@ -45,9 +45,9 @@ function ViewFixture() {
                   <h3 className=" text-gray-400">{match?.matchName}</h3>
                   {match?.scoreOne&&match?.scoreTwo?
                   <div className="flex justify-center m-4">
-                  <span className="bg-gray-800 text-center font-bold text-xl h-10 pt-1 w-16 rounded-sm">{match?.scoreOne}</span>
+                  <span className="bg-gray-800 text-center font-bold text-xl h-10 pt-1 sm:w-16 w-12 rounded-sm">{match?.scoreOne}</span>
                   <span className="text-2xl mx-2 font-bold">:</span>
-                  <span className="bg-gray-800 rounded-sm text-center font-bold text-xl pt-1 h-10 w-16">{match?.scoreTwo}</span>
+                  <span className="bg-gray-800 rounded-sm text-center font-bold text-xl pt-1 h-10 sm:w-16 w-12">{match?.scoreTwo}</span>
                   </div>:<><h3 className="text-red-600 text-2xl mb-2 mt-4">VS</h3>
                   <h3>{new Date(`1970-01-01T${match?.time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</h3></>}
                   <h3>{match ? match.date.split("T")[0] : ""}</h3>

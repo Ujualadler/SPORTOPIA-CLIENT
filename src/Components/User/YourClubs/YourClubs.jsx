@@ -54,7 +54,7 @@ function YourClubs() {
       </div>
       {loading ? (
         <div className="flex justify-center mt-40 h-80">
-          <ClipLoader color="#ffffff" loading={loading} size={150} />
+          <ClipLoader color="#ffffff" loading={loading} size={70} />
         </div>
       ) : clubData.length ? (
         clubData
