@@ -144,20 +144,8 @@ const CreateTournament = () => {
     { value: "others", label: "OTHERS" }
   ];
 
-  const noOfTeams = [
-    { value: "football", label: "2" },
-    { value: "cricket", label: "4" },
-    { value: "badminton", label: "8" },
-    { value: "basketball", label: "16" },
-    { value: "hockey", label: "32" },
-  ];
-
   const handleSportChange = (event) => {
     setSportsType(event.target.value);
-  };
-
-  const handleTeamChange = (event) => {
-    setMaximumTeams(event.target.value);
   };
 
   return (
@@ -255,7 +243,7 @@ const CreateTournament = () => {
                 htmlFor="name"
                 className="font-semibold text-gray-200 block pb-1"
               >
-                Description
+                 Description
               </label>
               <div className="flex">
                 <input
@@ -269,27 +257,25 @@ const CreateTournament = () => {
                 />
               </div>
             </div>
-            <div className="mb-2">
+         
+            <div className="pb-2">
               <label
-                htmlFor="sports"
-                className="block font-semibold text-gray-200"
+                htmlFor="name"
+                className="font-semibold text-gray-200 block pb-1"
               >
-                Select no of teams:
+                Maximum teams
               </label>
-              <select
-                id="sports"
-                name="sports"
-                value={maximumTeams}
-                onChange={handleTeamChange}
-                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-r shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"
-              >
-                {maximumTeams === "" && <option value="">Select no of teams</option>}
-                {noOfTeams.map((sport) => (
-                  <option className="h-28" key={sport.value} value={sport.value}>
-                    {sport.label}
-                  </option>
-                ))}
-              </select>
+              <div className="flex">
+                <input
+                  id="username"
+                  className="border border-gray-400 rounded-r px-4 py-2 w-full pb-1 break-word"
+                  type="number"
+                  placeholder="Enter maximum teams allowed"
+                  onChange={(e) => {
+                    setMaximumTeams(e.target.value);
+                  }}
+                />
+              </div>
             </div>
             <div className="pb-2">
               <label
