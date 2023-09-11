@@ -91,10 +91,6 @@ const CreateTournament = () => {
       generateError("Starting date should be at least 5 days ahead of today");
       return;
     }
-    if (selectedSport ==='Select a sport') {
-      generateError("Select a sports type");
-      return;
-    }
     if (startingDate > endingDate) {
       generateError(
         "Ending date and time should be after starting date and time"
@@ -242,7 +238,6 @@ const CreateTournament = () => {
               <select
                 id="sports"
                 name="sports"
-                value={sportsType}
                 onChange={handleSportChange}
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-r shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"
               >
