@@ -177,9 +177,9 @@ const TurfBooking = () => {
       if (response.data.error) {
         toast.error(`${response.data.error}[${response.data.slots}]`);
       }
-      // if (response.data.url) {
-      //   window.location.href = response.data.url;
-      // }
+      if (response.data.url) {
+        window.location.href = response.data.url;
+      }
 
       console.log(response);
     } catch (error) {

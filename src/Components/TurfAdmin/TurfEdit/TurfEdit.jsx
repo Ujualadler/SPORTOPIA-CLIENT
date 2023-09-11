@@ -19,32 +19,30 @@ const TurfEdit = () => {
   const [advance, setAdvance] = useState("");
   const [total, setTotal] = useState("");
 
-  const turfAxios=TurfAxios()
+  const turfAxios = TurfAxios();
 
   const img = useRef(null);
 
   const { id } = useParams();
 
   useEffect(() => {
-    turfAxios
-      .get(`/getTurfDetail?id=${id}`)
-      .then((response) => {
-        const turfdata = response.data.data;
-        setTurfName(turfdata.turfName);
-        setPhone(turfdata.phone);
-        setTurfType(turfdata.turfType);
-        setLogo(turfdata.logo);
-        setAdvance(turfdata.advance);
-        setPhotos(turfdata.photos);
-        setPin(turfdata.pin);
-        setClosing(turfdata.closing);
-        setPreview(turfdata.logo);
-        setTotal(turfdata.total);
-        setCity(turfdata.city);
-        setStreet(turfdata.street);
-        setState(turfdata.state);
-        setOpening(turfdata.opening);
-      });
+    turfAxios.get(`/getTurfDetail?id=${id}`).then((response) => {
+      const turfdata = response.data.data;
+      setTurfName(turfdata.turfName);
+      setPhone(turfdata.phone);
+      setTurfType(turfdata.turfType);
+      setLogo(turfdata.logo);
+      setAdvance(turfdata.advance);
+      setPhotos(turfdata.photos);
+      setPin(turfdata.pin);
+      setClosing(turfdata.closing);
+      setPreview(turfdata.logo);
+      setTotal(turfdata.total);
+      setCity(turfdata.city);
+      setStreet(turfdata.street);
+      setState(turfdata.state);
+      setOpening(turfdata.opening);
+    });
   }, []);
 
   const successToast = (msg) => {
@@ -101,7 +99,7 @@ const TurfEdit = () => {
       reader.onload = () => {
         const newPreviews = [...photoPreviews];
         newPreviews[index] = reader.result;
-        photos[index]=reader.result
+        photos[index] = reader.result;
         setPhotoPreviews(newPreviews);
       };
       reader.onerror = (error) => {
@@ -117,8 +115,7 @@ const TurfEdit = () => {
     e.preventDefault();
 
     const generateError = (err) =>
-    toast.error(err, { position: "bottom-center" });
-
+      toast.error(err, { position: "bottom-center" });
 
     if (
       !turfName.trim() ||
@@ -152,23 +149,21 @@ const TurfEdit = () => {
     }
 
     turfAxios
-      .post(
-        `/turfEdit?id=${id}`,
-        {
-          turfName,
-          phone,
-          logo: preview,
-          city,
-          pin,
-          state,
-          street,
-          opening,
-          closing,
-          advance,
-          total,
-          turfType,
-          photos
-        })
+      .post(`/turfEdit?id=${id}`, {
+        turfName,
+        phone,
+        logo: preview,
+        city,
+        pin,
+        state,
+        street,
+        opening,
+        closing,
+        advance,
+        total,
+        turfType,
+        photos,
+      })
       .then((res) => {
         if (res.data.status === "success") {
           successToast("Updated Successfully");
@@ -178,8 +173,21 @@ const TurfEdit = () => {
       })
       .catch((err) => {
         console.log(err);
-        navigate('/turf/error')
+        navigate("/turf/error");
       });
+  };
+
+  const sports = [
+    { value: "football", label: "FOOTBALL" },
+    { value: "cricket", label: "CRICKET" },
+    { value: "badminton", label: "BADMINTON" },
+    { value: "basketball", label: "BASKETBALL" },
+    { value: "hockey", label: "HOCKEY" },
+    { value: "others", label: "OTHERS" },
+  ];
+
+  const handleSportChange = (event) => {
+    setType(event.target.value);
   };
 
   return (
@@ -236,7 +244,7 @@ const TurfEdit = () => {
           <h3 className="w-full font-semibold m-2 text-white">TURF IMAGES</h3>
           <div className=" flex-wrap col grid grid-cols-2 bg-gray-950  shadow-2xl">
             {photos.map((pic, index) => (
-              <div key={index}  className="m-2 col-span-1 md:ml-3 ">
+              <div key={index} className="m-2 col-span-1 md:ml-3 ">
                 <input
                   ref={(el) => (fileInputRefs[index] = el)}
                   type="file"
@@ -268,9 +276,9 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="text"
-                  value={turfName?turfName : ""}
+                  value={turfName ? turfName : ""}
                   placeholder="Enter turf name"
                   onChange={(e) => {
                     setTurfName(e.target.value);
@@ -279,24 +287,26 @@ const TurfEdit = () => {
               </div>
             </div>
             <div className="pb-2">
-              <label
-                htmlFor="name"
-                className="font-semibold text-gray-200 block pb-1"
-              >
-                Type
+              <label htmlFor="sports" className="block text-sm text-gray-200">
+                Sport type:
               </label>
-              <div className="flex">
-                <input
-                  id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
-                  type="text"
-                  value={turfType ? turfType : ""}
-                  placeholder="Enter turf type"
-                  onChange={(e) => {
-                    setTurfType(e.target.value);
-                  }}
-                />
-              </div>
+              <select
+                id="sports"
+                name="sports"
+                onChange={handleSportChange}
+                className="mt-1 block w-full text-black py-2 px-3 border border-gray-300 bg-white rounded-r shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"
+              >
+                {turfType === "" && <option value="">Select type</option>}
+                {sports.map((sport) => (
+                  <option
+                    className="h-28"
+                    key={sport.value}
+                    value={sport.value}
+                  >
+                    {sport.label}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="pb-2">
               <label
@@ -308,7 +318,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="number"
                   defaultValue={phone ? phone : ""}
                   placeholder="Enter phone number"
@@ -328,7 +338,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="time"
                   defaultValue={opening ? opening : ""}
                   placeholder="Enter opening time"
@@ -348,7 +358,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="time"
                   defaultValue={closing ? closing : ""}
                   placeholder="Enter closing time"
@@ -368,7 +378,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="number"
                   defaultValue={advance ? advance : ""}
                   placeholder="Enter advance"
@@ -388,7 +398,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="number"
                   defaultValue={total ? total : ""}
                   placeholder="Enter age"
@@ -408,7 +418,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="text"
                   value={street ? street : ""}
                   placeholder="Enter street name"
@@ -428,7 +438,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="text"
                   value={city ? city : ""}
                   placeholder="Enter city name"
@@ -448,7 +458,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="text"
                   value={state ? state : ""}
                   placeholder="Enter state name"
@@ -468,7 +478,7 @@ const TurfEdit = () => {
               <div className="flex">
                 <input
                   id="username"
-                  className="border border-gray-700 rounded-r px-4 py-2 w-full"
+                  className="border border-gray-700 text-black rounded-r px-4 py-2 w-full"
                   type="number"
                   placeholder="Enter PIN code"
                   value={pin ? pin : ""}

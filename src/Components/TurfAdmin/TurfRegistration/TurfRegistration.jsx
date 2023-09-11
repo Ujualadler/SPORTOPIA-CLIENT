@@ -1,15 +1,17 @@
 import React, { useRef, useState } from "react";
 import TurfAxios from "../../../Axios/turfAxios";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 import mapboxSdk from "@mapbox/mapbox-sdk/services/geocoding";
-const geocodingService = mapboxSdk({ accessToken: "pk.eyJ1IjoidWp1YWwiLCJhIjoiY2xrdGFzN2V4MDg3MDNxcGNzanpvNm9zNiJ9.BcpaFJF6wn3SY2XJoRqDyA" });
+const geocodingService = mapboxSdk({
+  accessToken:
+    "pk.eyJ1IjoidWp1YWwiLCJhIjoiY2xrdGFzN2V4MDg3MDNxcGNzanpvNm9zNiJ9.BcpaFJF6wn3SY2XJoRqDyA",
+});
 
 function TurfRegistration() {
-
-  const turfAxios=TurfAxios()
+  const turfAxios = TurfAxios();
 
   const [turfName, setTurfName] = useState("");
   const [turfType, setType] = useState("");
@@ -110,7 +112,7 @@ function TurfRegistration() {
           limit: 1, // Set the limit to 1 to get only one result
         })
         .send();
-  
+
       if (response && response.body && response.body.features) {
         const [longitude, latitude] = response.body.features[0].center;
         return { latitude, longitude };
@@ -121,7 +123,6 @@ function TurfRegistration() {
       throw new Error("Error geocoding address");
     }
   }
-  
 
   const submitTurf = async (e) => {
     e.preventDefault();
@@ -160,33 +161,28 @@ function TurfRegistration() {
     }
 
     try {
-
       const address = `${street}, ${city}, ${state}, ${pin}`;
-      
-      const coordinates = await getCoordinatesFromAddress(address);
-      console.log(coordinates+'')
-      let response = await turfAxios.post(
-        "/registration",
-        {
-          turfName,
-          turfType,
-          opening,
-          closing,
-          advance,
-          total,
-          street,
-          city,
-          state,
-          pin,
-          phone,
-          photos,
-          preview,
-          latitude: coordinates.latitude,
-          longitude: coordinates.longitude,
 
-        }
-      );
-      console.log(token._id)
+      const coordinates = await getCoordinatesFromAddress(address);
+      console.log(coordinates + "");
+      let response = await turfAxios.post("/registration", {
+        turfName,
+        turfType,
+        opening,
+        closing,
+        advance,
+        total,
+        street,
+        city,
+        state,
+        pin,
+        phone,
+        photos,
+        preview,
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+      });
+      console.log(token._id);
 
       if (response.data.status === true) {
         navigate("/turf");
@@ -194,9 +190,22 @@ function TurfRegistration() {
         generateError(response.data.error);
       }
     } catch (error) {
-      navigate('/turf/error')
+      navigate("/turf/error");
       console.error(error);
     }
+  };
+
+  const sports = [
+    { value: "football", label: "FOOTBALL" },
+    { value: "cricket", label: "CRICKET" },
+    { value: "badminton", label: "BADMINTON" },
+    { value: "basketball", label: "BASKETBALL" },
+    { value: "hockey", label: "HOCKEY" },
+    { value: "others", label: "OTHERS" },
+  ];
+
+  const handleSportChange = (event) => {
+    setType(event.target.value);
   };
 
   return (
@@ -303,28 +312,32 @@ function TurfRegistration() {
                       </div>
                     </div>
 
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <label
-                          htmlFor="type"
-                          className="block text-sm font-medium leading-6 text-gray-200"
-                        >
-                          Type
-                        </label>
-                      </div>
-                      <div className="mt-1">
-                        <input
-                          id="type"
-                          name="type"
-                          type="text"
-                          autoComplete="type"
-                          value={turfType}
-                          onChange={(e) => {
-                            setType(e.target.value);
-                          }}
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        />
-                      </div>
+                    <div className="pb-2">
+                      <label
+                        htmlFor="sports"
+                        className="block text-sm text-gray-200"
+                      >
+                        Sport type:
+                      </label>
+                      <select
+                        id="sports"
+                        name="sports"
+                        onChange={handleSportChange}
+                        className="mt-1 block w-full text-black py-2 px-3 border border-gray-300 bg-white rounded-r shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"
+                      >
+                        {turfType === "" && (
+                          <option value="">Select type</option>
+                        )}
+                        {sports.map((sport) => (
+                          <option
+                            className="h-28"
+                            key={sport.value}
+                            value={sport.value}
+                          >
+                            {sport.label}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </>
                 ) : currentSection === 2 ? (

@@ -123,6 +123,20 @@ const ClubCreation = () => {
       });
   };
 
+  const sports = [
+    { value: "football", label: "FOOTBALL" },
+    { value: "cricket", label: "CRICKET" },
+    { value: "badminton", label: "BADMINTON" },
+    { value: "basketball", label: "BASKETBALL" },
+    { value: "hockey", label: "HOCKEY" },
+    { value: "others", label: "OTHERS" }
+  ];
+ 
+
+  const handleSportChange = (event) => {
+    setClubType(event.target.value);
+  };
+
   return (
     <form className="h-full" onSubmit={createClub}>
       <div className=" block md:flex md:ml-12 md:mr-12 ">
@@ -215,22 +229,24 @@ const ClubCreation = () => {
             </div>
             <div className="pb-2">
               <label
-                htmlFor="name"
-                className="font-semibold text-gray-200 block pb-1"
+                htmlFor="sports"
+                className="block font-semibold text-gray-200"
               >
-                Type
+                Select a sport:
               </label>
-              <div className="flex">
-                <input
-                  id="username"
-                  className="border border-gray-400 rounded-r px-4 py-2 w-full"
-                  type="text"
-                  placeholder="Enter club type"
-                  onChange={(e) => {
-                    setClubType(e.target.value);
-                  }}
-                />
-              </div>
+              <select
+                id="sports"
+                name="sports"
+                onChange={handleSportChange}
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-r shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-300"
+              >
+                {clubType === "" && <option value="">Select a sport</option>}
+                {sports.map((sport) => (
+                  <option className="h-28" key={sport.value} value={sport.value}>
+                    {sport.label}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="pb-2">
