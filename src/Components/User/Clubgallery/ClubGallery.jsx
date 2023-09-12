@@ -8,7 +8,7 @@ import { ClipLoader } from "react-spinners";
 function ClubGallery() {
   const userAxios = UserAxios();
   const clubId = useSelector((state) => state.Club.clubId);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState("");
   const [file, setFile] = useState("");
   const [state, setState] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -56,9 +56,11 @@ function ClubGallery() {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       if (response.data.status === true) {
+        setContent(null);
         toast.success("Saved Successfully");
+        setFile("");
         setGallery(response.data.gallery);
-        setState(true)
+        setState(true);
       }
     } catch (error) {
       console.log(error);
@@ -67,8 +69,7 @@ function ClubGallery() {
 
   const removeGallery = async (id) => {
     try {
-      const response = await userAxios.post("/removeGallery", { clubId, id });
-      Swal.fire({
+      const confirmed = await Swal.fire({
         title: "Are you sure?",
         text: "Do you want to remove this!",
         icon: "warning",
@@ -76,13 +77,16 @@ function ClubGallery() {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "REMOVE",
-      }).then((result) => {
-        if (result.isConfirmed == true) {
+      });
+      if (confirmed.isConfirmed) {
+        const response = await userAxios.post("/removeGallery", { clubId, id });
+
+        if (response.data.status) {
           Swal.fire("Successfully removed");
           setGallery(response.data.gallery);
-          setState(true)
+          setState(true);
         }
-      });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -128,7 +132,7 @@ function ClubGallery() {
           </div>
           <div className="mt-2 ">
             <input
-              className="w-full h-14 bg-black text-center bg-opacity-70 rounded-md md:w-[99%]"
+              className="w-full h-14 bg-black text-white text-center bg-opacity-70 rounded-md md:w-[99%]"
               type="text"
               onChange={(e) => setContent(e.target.value)}
               placeholder="Your description"
@@ -163,7 +167,7 @@ function ClubGallery() {
                 <button
                   key={data?._id}
                   onClick={() => removeGallery(data._id)}
-                  type="submit"
+                  type="button"
                   className="sm:w-32 w-18 ml-2 bg-black p-2 text-white hover:bg-gray-900"
                 >
                   REMOVE

@@ -3,7 +3,6 @@ import AdminAxios from "../../../Axios/adminAxios";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-
 function Banner() {
   const adminAxios = AdminAxios();
   const [title, setTitle] = useState(null);
@@ -13,20 +12,19 @@ function Banner() {
   const [banner, setBanner] = useState("");
   const img = useRef();
 
-  useEffect(()=>{
+  useEffect(() => {
     try {
-        const getBanner=async()=>{
-            const response=await adminAxios.get('/getBanner')
-            if(response){
-                setBanner(response.data.banner)
-            }
+      const getBanner = async () => {
+        const response = await adminAxios.get("/getBanner");
+        if (response) {
+          setBanner(response.data.banner);
         }
-        getBanner()
+      };
+      getBanner();
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-    
-  },[state])
+  }, [state]);
 
   const changeimg = (event) => {
     const file = event.target.files[0];
@@ -40,24 +38,24 @@ function Banner() {
 
   const uploadBanner = async (e) => {
     e.preventDefault();
-    if (!title||!subTitle|| !file) {
+    if (!title || !subTitle || !file) {
       toast.error("fill all the fields");
       return;
     }
-    
+
     try {
       const response = await adminAxios.post(
         "/bannerAdd",
-        { title,subTitle, file: file},
+        { title, subTitle, file: file },
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       if (response.data.status === true) {
         toast.success("Saved Successfully");
         setBanner(response.data.banner);
-        setFile('')
-        setTitle('')
-        setSubTitle('')
-        setState(true)
+        setFile("");
+        setTitle("");
+        setSubTitle("");
+        setState(true);
       }
     } catch (error) {
       console.log(error);
@@ -66,28 +64,30 @@ function Banner() {
 
   const removeBanner = async (id) => {
     try {
-      const response = await adminAxios.post('/removeBanner',{id});
-      Swal.fire({
-        title:"Are you sure?",
-        text:"Do you want to remove this!",
+      const confirm =await Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to remove this!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText:"REMOVE",
-    }).then((result) => {
-        if (result.isConfirmed==true) {
-            Swal.fire("Successfully removed");
-            setBanner(response.data.banner)
+        confirmButtonText: "REMOVE",
+      });
+      if (confirm.isConfirmed) {
+        const response = await adminAxios.post("/removeBanner", { id });
+
+        if (response.data.status) {
+          Swal.fire("Successfully removed");
+          setBanner(response.data.banner);
+          setState(true);
         }
-    });
-    
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-//   console.log(gallery+'gallery')
+  //   console.log(gallery+'gallery')
 
   return (
     <div>
@@ -150,9 +150,12 @@ function Banner() {
           </div>
         </div>
         <div className="col-span-2 gallery overflow-scroll h-[360px]">
-        {banner.length
-          ? banner.map((data) => (
-              <div key={data._id} className="bg-black bg-opacity-60 w-[40rem] md:w-min  h-28 flex justify-between p-2 rounded-xl mb-2">
+          {banner.length ? (
+            banner.map((data) => (
+              <div
+                key={data._id}
+                className="bg-black bg-opacity-60 w-[40rem] md:w-min  h-28 flex justify-between p-2 rounded-xl mb-2"
+              >
                 <img
                   src={data?.image} // Use the actual image URL from the data
                   loading="lazy"
@@ -160,22 +163,37 @@ function Banner() {
                   className="w-24 h-24"
                 />
                 <div className="m-5 w-[35rem]  text-ellipsis ">
-                <p className="text-white pl-2"><label className="mr-2 text-gray-400" htmlFor="">TITLE:</label>{data?.title}</p>
-                <p className="text-white pl-2"><label className="mr-2 text-gray-400" htmlFor="">SUB TITLE:</label>{data?.subTitle}</p>
+                  <p className="text-white pl-2">
+                    <label className="mr-2 text-gray-400" htmlFor="">
+                      TITLE:
+                    </label>
+                    {data?.title}
+                  </p>
+                  <p className="text-white pl-2">
+                    <label className="mr-2 text-gray-400" htmlFor="">
+                      SUB TITLE:
+                    </label>
+                    {data?.subTitle}
+                  </p>
                 </div>
-                <button  key={data._id} onClick={()=>removeBanner(data._id)} type="submit" className="w-32 ml-2 bg-black p- text-white hover:bg-gray-900">
+                <button
+                  key={data._id}
+                  onClick={() => removeBanner(data._id)}
+                  type="button"
+                  className="w-32 ml-2 bg-black p- text-white hover:bg-gray-900"
+                >
                   REMOVE
                 </button>
               </div>
             ))
-          :(
+          ) : (
             <div className="flex justify-center mt-36 h-screen">
               <div className="text-xl font-bold">NO BANNER AVAILABLE </div>
             </div>
           )}
-          </div>
+        </div>
       </form>
-      </div>
+    </div>
   );
 }
 

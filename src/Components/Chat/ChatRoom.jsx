@@ -10,14 +10,14 @@ function ChatRoom() {
   const userAxios = UserAxios();
   const clubId = useSelector((state) => state.Club.userClubId);
   const userData = useSelector((state) => state.User.UserData);
-  const [message, setMessage] = useState("");
+  const [newnmessage, setMessage] = useState("");
   const [clubData, setClubData] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fetchData, setFetchData] = useState(false)
 
   const [page, setPage] = useState(0)
-
+  let message = newnmessage
   const messagesHolder = useRef(null)
   const [scrolled, setScrolled] = useState(false)
 
@@ -109,18 +109,17 @@ function ChatRoom() {
 
   const sendMessage = async () => {
     if (message.length !== 0 && socket) {
+      setMessage("");
       try {
         const response = await userAxios.post("/addMessage", {
           message,
           clubId,
         });
         const updatedMessages = response?.data?.msg;
-        console.log(updatedMessages, "alefdhadsiufhaidjfhil");
-        setMessage("");
         socket.emit("chatMessage", clubId, updatedMessages);
       } catch (error) {
         // Handle error
-        console.log(error, "kkkkkkkk");
+        console.log(error);
       }
     }
   };
