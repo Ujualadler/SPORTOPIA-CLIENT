@@ -167,12 +167,16 @@ const TurfBooking = () => {
 
     try {
       const response = await userAxios.post("/createCheckout", {
-        turfId: id,
+        turfId: id, 
         date,
         selectedSlots,
         totalAdvance,
         totalAmount,
         data,
+      },{
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
       if (response.data.error) {
         toast.error(`${response.data.error}[${response.data.slots}]`);
