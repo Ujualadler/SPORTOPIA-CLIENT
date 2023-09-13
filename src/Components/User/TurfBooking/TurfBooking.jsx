@@ -266,12 +266,12 @@ const TurfBooking = () => {
 
         {mapView ? (
           <ViewMap
-            turfLongitude={data.longitude}
-            turfLatitude={data.latitude}
+            turfLongitude={data?.longitude}
+            turfLatitude={data?.latitude}
             userLongitude={userLongitude}
             userLatitude={userLatitude}
-            turfName={data.turfName}
-            turfLogo={data.logo}
+            turfName={data?.turfName}
+            turfLogo={data?.logo}
           />
         ) : (
           ""
@@ -291,7 +291,7 @@ const TurfBooking = () => {
                   />
                 ) : (
                   <img
-                    src={data ? data.photos[0] : ""}
+                    src={data ? data?.photos[0] : ""}
                     onClick={() => {
                       imageRef.current.click();
                     }}
@@ -304,7 +304,7 @@ const TurfBooking = () => {
                 {data
                   ? data.photos.map((img) => {
                       return (
-                        <div className="p-1 w-3/12 " key={img._id}>
+                        <div className="p-1 w-3/12 " key={img?._id}>
                           <a
                             onClick={() => setSelectedImage(img)}
                             className="block border border-transparent dark:border-transparent dark:hover:border-red-300 hover:border-red-300"
@@ -334,7 +334,7 @@ const TurfBooking = () => {
                     <svg
                       key={star}
                       className={`w-6 h-6 cursor-pointer  ${
-                        star <= reviewData.totalRating
+                        star <= reviewData?.totalRating
                           ? "text-yellow-500"
                           : "text-gray-100"
                       }`}
@@ -354,7 +354,7 @@ const TurfBooking = () => {
                   <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                     TYPE
                   </font>
-                  <span>{data ? data.turfType : ""}</span>
+                  <span>{data ? data?.turfType : ""}</span>
                 </h2>
                 <div className=" flex">
                   <h2 className="w-full text-md font-semibold align-center mb-4 flex dark:text-gray-300">
@@ -362,8 +362,8 @@ const TurfBooking = () => {
                       TIMING
                     </div>
                     <span>
-                      {`${data && convertTo12HourFormat(data.opening)} to ${
-                        data && convertTo12HourFormat(data.closing)
+                      {`${data && convertTo12HourFormat(data?.opening)} to ${
+                        data && convertTo12HourFormat(data?.closing)
                       }`}
                     </span>
                   </h2>
@@ -372,7 +372,7 @@ const TurfBooking = () => {
                   <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                     PHONE
                   </font>
-                  <span>{data ? data.phone : ""}</span>
+                  <span>{data ? data?.phone : ""}</span>
                 </h2>
                 <div className="w-full bg-gray-900  ">
                   <div
@@ -390,25 +390,25 @@ const TurfBooking = () => {
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           STREET
                         </font>
-                        <span>{data ? data.street : ""}</span>
+                        <span>{data ? data?.street : ""}</span>
                       </h2>
                       <h2 className="w-full mr-6 px-2 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           CITY
                         </font>
-                        {data ? data.city : ""}
+                        {data ? data?.city : ""}
                       </h2>
                       <h2 className="w-full mr-6 px-2 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           STATE
                         </font>
-                        {data ? data.state : ""}
+                        {data ? data?.state : ""}
                       </h2>
                       <h2 className="w-full mr-6 px-2 pb-1 text-md font-semibold mb-4 text-gray-300">
                         <font className="inline-block w-2/5 text-gray-100 mr-3 font-bold font-poppins">
                           PIN
                         </font>
-                        {data ? data.pin : ""}
+                        {data ? data?.pin : ""}
                       </h2>
                     </>
                   )}
@@ -417,14 +417,14 @@ const TurfBooking = () => {
                 <p className="mt-4 mb-4 text-md font-bold font-poppins text-gray-100 dark:text-gray-100">
                   <span className="inline-block w-2/5 mr-3">FOR 1 HOUR</span>
                   <span className="text-gray-300">
-                    ₹{data ? data.total : ""}
+                    ₹{data ? data?.total : ""}
                   </span>
                 </p>
 
                 <p className="mb-4 text-md font-bold font-poppins  text-gray-100 dark:text-gray-100">
                   <span className="mr-3 inline-block w-2/5">ADVANCE</span>
                   <span className="text-gray-300">
-                    ₹{data ? data.advance : ""}
+                    ₹{data ? data?.advance : ""}
                   </span>
                   <span className="text-red-500 sm:ml-4 ml-1 sm:text-base text-sm">
                     NONREFUNDABLE
@@ -452,11 +452,11 @@ const TurfBooking = () => {
                   </div>
                   {showSlots && (
                     <div className="flex  sm:justify-between  sm:ml-5 ml-12 flex-wrap text-gray-300 overflow-y-scroll   ">
-                      {timeSlots.map((slot, index) => {
-                        const bookedSlot = data.turfBookings.find(
+                      {timeSlots?.map((slot, index) => {
+                        const bookedSlot = data?.turfBookings.find(
                           (booking) =>
-                            booking.bookedDate.split("T")[0] === date &&
-                            booking.bookedSlots.some((bookedSlot) =>
+                            booking?.bookedDate.split("T")[0] === date &&
+                            booking?.bookedSlots.some((bookedSlot) =>
                               bookedSlot.includes(`${slot.start}-${slot.end}`)
                             )
                         );
@@ -494,8 +494,8 @@ const TurfBooking = () => {
                               }}
                             />
                             <label className="text-md sm:text-lg">{`${convertTo12HourFormat(
-                              slot.start
-                            )} to ${convertTo12HourFormat(slot.end)}`}</label>
+                              slot?.start
+                            )} to ${convertTo12HourFormat(slot?.end)}`}</label>
                           </div>
                         );
                       })}
@@ -504,10 +504,6 @@ const TurfBooking = () => {
                 </div>
                 {selectedSlots.length ? (
                   <div className="font-poppins">
-                    <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
-                      <span className="mr-5">SLOTS</span>
-                      <span className="text-gray-400">{selectedSlots}</span>
-                    </div>
                     <div className=" mt-4 mb-4 text-md font-bold font-poppins text-gray-100 ">
                       <span className="mr-3">TOTAL ADVANCE</span>
                       <span className="text-gray-400">₹{totalAdvance}</span>

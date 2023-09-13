@@ -1,29 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Carousal from "../../Utilities/Carousal";
+import React from "react";
 import Cards from "../../Utilities/Cards";
 import { Link } from "react-router-dom";
-import AdminAxios from "../../../Axios/adminAxios";
+
 
 
 function TurfHome() {
-  const [banner, setBanner] = useState("");
-  const adminAxios = AdminAxios();
-
-  useEffect(() => {
-    try {
-      const getBanner = async () => {
-        const response = await adminAxios.get("/getBanner");
-        if (response) {
-          setBanner(response.data.banner);
-        }
-      };
-      getBanner();
-    } catch (error) {
-      console.log(error);
-      navigate('/turf/error')
-    }
-  }, []);
-
 
   let register = {
     image: "https://wallpaperaccess.com/full/1767917.jpg",
@@ -55,7 +36,6 @@ function TurfHome() {
           WELCOME TURF ADMIN
         </div>
       </div>
-      <Carousal slides={banner?banner:''} interval={4} />
       <div class="flex flex-wrap bg-black m-1">
         <Cards reg={register} />
         <Cards reg={bookinglist} />

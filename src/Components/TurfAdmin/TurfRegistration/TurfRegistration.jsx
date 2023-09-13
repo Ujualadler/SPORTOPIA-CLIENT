@@ -3,8 +3,8 @@ import TurfAxios from "../../../Axios/turfAxios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-
 import mapboxSdk from "@mapbox/mapbox-sdk/services/geocoding";
+
 const geocodingService = mapboxSdk({
   accessToken:
     "pk.eyJ1IjoidWp1YWwiLCJhIjoiY2xrdGFzN2V4MDg3MDNxcGNzanpvNm9zNiJ9.BcpaFJF6wn3SY2XJoRqDyA",
@@ -72,7 +72,6 @@ function TurfRegistration() {
 
   const uploadPhoto = (event) => {
     const files = event.target.files;
-    console.log(files, "==");
     const results = [];
 
     if (files.length !== 4) {
@@ -182,10 +181,11 @@ function TurfRegistration() {
         latitude: coordinates.latitude,
         longitude: coordinates.longitude,
       });
-      console.log(token._id);
-
+ 
       if (response.data.status === true) {
-        navigate("/turf");
+        toast.success('Successfully registered')
+        navigate("/turf/listing");
+        
       } else {
         generateError(response.data.error);
       }
