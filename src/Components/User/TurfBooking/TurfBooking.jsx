@@ -9,9 +9,13 @@ import Review from "../Review/Review";
 import { io } from "socket.io-client";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
+
 
 const TurfBooking = () => {
   const userAxios = UserAxios();
+  const [loading, setLoading] = useState(true);
+
 
   const { id } = useParams();
   const imageRef = useRef(null);
@@ -52,6 +56,8 @@ const TurfBooking = () => {
   const userId = useSelector((state) => state.User.UserData._id);
 
   useEffect(() => {
+    setLoading(true);
+
     userAxios
       .get(`/getTurfDetail?id=${id}`)
       .then((res) => {
@@ -62,6 +68,8 @@ const TurfBooking = () => {
         if (result.opening && result.closing) {
           updateSlots(result.opening, result.closing);
         }
+        setLoading(false);
+
       })
       .catch((err) => {
         console.log(err);
@@ -160,6 +168,9 @@ const TurfBooking = () => {
   };
 
   const handlePayment = async () => {
+
+    setLoading(true);
+    
     if (!date || selectedSlots.length === 0) {
       toast.error("Please select a date and at least one time slot.");
       return;
@@ -173,10 +184,6 @@ const TurfBooking = () => {
         totalAdvance,
         totalAmount,
         data,
-      },{
-        headers: {
-          'Content-Type': 'application/json',
-        }
       });
       if (response.data.error) {
         toast.error(`${response.data.error}[${response.data.slots}]`);
@@ -185,7 +192,8 @@ const TurfBooking = () => {
         window.location.href = response.data.url;
       }
 
-      console.log(response);
+      setLoading(false);
+      
     } catch (error) {
       navigate("/error");
       toast.error("Payment failed. Please try again.");
@@ -254,7 +262,12 @@ const TurfBooking = () => {
   };
 
   return (
-    <section className="overflow-hidden  font-poppins   m-1 ">
+    <>
+    {loading ? (
+      <div className="flex justify-center mt-40 h-80">
+        <ClipLoader color="#ffffff" loading={loading} size={70} />
+      </div>
+    ):<section className="overflow-hidden  font-poppins   m-1 ">
       <div className="  ml-3 mr-3 mt-7 ">
         <div className="flex justify-between  ">
           <h2 className="max-w-xl md:mb-5 text-xl text-white font-bold md:text-3xl">
@@ -291,11 +304,11 @@ const TurfBooking = () => {
                       imageRef.current.click();
                     }}
                     alt=""
-                    className="object-cover w-full h-64  md:h-96  rounded-lg"
+                    className="object-cover w-full h-64 bg-gray-950 md:h-96  rounded-lg"
                   />
                 ) : (
                   <img
-                    src={data ? data?.photos[0] : ""}
+                    src={data ? data?.photos[0] : "https://i.pinimg.com/736x/c7/4d/3f/c74d3fa6950c272b9f4e0b6f2fcc1e86.jpg"}
                     onClick={() => {
                       imageRef.current.click();
                     }}
@@ -536,15 +549,17 @@ const TurfBooking = () => {
           </div>
         </div>
       </div>
-      {reviewData.reviews ? (
+      {reviewData.length>0&&reviewData.reviews ? (
         <Review review={reviewData} />
       ) : (
         <div className="flex justify-center mt-8">
           <h1 className="text-xl text-white font-bold">NO REVIEW AVAILABLE</h1>
         </div>
       )}
-    </section>
-  );
-};
+    </section>}
+    </>
+    );
+}
+;
 
 export default TurfBooking;
