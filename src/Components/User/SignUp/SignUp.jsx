@@ -12,7 +12,7 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const generateError = (err) =>
-    toast.error(err, { position: "bottom-center" });
+    toast.error(err);
 
   const signUpForm = async (e) => {
     e.preventDefault();
@@ -27,7 +27,10 @@ export default function SignUp() {
       generateError("Please enter a valid email address");
       return;
     }
-
+    if (phone.length < 10) {
+      generateError("Enter valid mobile number");
+      return;
+    }
     if (password.length < 4) {
       generateError("Password should be at least 6 characters long");
       return;
@@ -43,7 +46,7 @@ export default function SignUp() {
 
       if (response.data.status) {
         console.log(response.data.message)
-        generateError(response.data.message)
+        toast(response.data.message)
 
         navigate("/login");
       } else {

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
-import turfAxios from "../../../Axios/turfAxios";
+import TurfAxios from "../../../Axios/turfAxios";
 import { useParams } from 'react-router-dom'
 
 function VerifyTurfMail() {
+  const turfAxios=TurfAxios()
     const { user_id } = useParams();
     useEffect(()=>{
         turfAxios.post('/verifyTurf',{user_id}).then((res)=>{

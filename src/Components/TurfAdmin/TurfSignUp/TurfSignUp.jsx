@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import TurfAxios from "../../../Axios/turfAxios";
-import { Toaster, toast } from "react-hot-toast";
+import {toast } from "react-toastify";
 
 export default function TurfSignUp() {
   const turfAxios=TurfAxios()
@@ -12,7 +12,7 @@ export default function TurfSignUp() {
   const navigate = useNavigate();
 
   const generateError = (err) =>
-    toast.error(err, { position: "bottom-center" });
+    toast.error(err);
 
   const signUpForm = async (e) => {
     e.preventDefault();
@@ -27,7 +27,10 @@ export default function TurfSignUp() {
       generateError("Please enter a valid email address");
       return;
     }
-
+    if (phone.length < 10) {
+      generateError("Enter a valid mobile number");
+      return;
+    }
     if (password.length < 4) {
       generateError("Password should be at least 6 characters long");
       return;
@@ -43,6 +46,7 @@ export default function TurfSignUp() {
       console.log(response);
       if (response.data.status) {
         navigate("/turf/login");
+        toast('Please verify your email inorder to login')
       } else {
         generateError(response.data.error);
       }
@@ -55,7 +59,6 @@ export default function TurfSignUp() {
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <Toaster position="top-center" reverseOrder={false} />
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             TURF ADMIN REGISTRATION
