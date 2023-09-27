@@ -105,42 +105,42 @@ function AdminViewTurf() {
               </div>
             </form>
           </div>
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="pl-9">
-                  No
-                </th>
-                <th scope="col" className="pl-9">
-                  IMAGE
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Type
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Phone Number
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading ? (
-                <td colSpan={6}  className="flex justify-center mt-40 h-80">
-                  <ClipLoader color="#ffffff" loading={loading} size={70} />
-                </td>
-              ) : (
-                turfData
-                  .filter((turf) =>
+          {loading ? (
+            <div className="flex justify-center mt-40 h-80">
+              <ClipLoader color="#ffffff" loading={loading} size={70} />
+            </div>
+          ) : (
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="pl-9">
+                    No
+                  </th>
+                  <th scope="col" className="pl-9">
+                    IMAGE
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Type
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Phone Number
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {turfData
+                  ?.filter((turf) =>
                     turf.turfName
                       .toLowerCase()
                       .includes(SearchInput.toLowerCase())
                   )
-                  .map((obj, index) => {
+                  ?.map((obj, index) => {
                     return (
                       <tr
                         key={obj._id}
@@ -177,10 +177,10 @@ function AdminViewTurf() {
                         </td>
                       </tr>
                     );
-                  })
-              )}
-            </tbody>
-          </table>
+                  })}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
