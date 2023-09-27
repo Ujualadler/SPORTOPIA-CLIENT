@@ -28,12 +28,12 @@ const ProfilePage = () => {
   return (
     <div className="p-2 mt-3">
       <div className="space-x-8 flex  justify-center mt-4  "></div>
-      <div className="p-8 bg-white shadow mt-24 border border-black bg-cover bg-center bg-[url('https://media.istockphoto.com/id/1287665860/vector/modern-3d-black-abstract-tech-background.jpg?s=612x612&w=0&k=20&c=jfj-7hsWU-jId-AblmySe1N47BxamdwPUEssBAULaL8=')] ">
+      <div className="p-8 warm-gray-800 shadow mt-24 border border-black bg-cover bg-center ">
         <div className="grid grid-cols-1 md:grid-cols-1">
           <div className="relative">
             <div className="w-48 h-48  mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-32  flex items-center justify-center text-indigo-500">
               <div className="w-48 h-24 overflow-hidden  mx-auto shadow-2xl absolute inset-x-0 bottom-0 -mt-32  flex items-center justify-center text-indigo-500 z-0 bg-none ">
-                <div className="w-48 h-48 bg-white absolute inset-x-0 bottom-0 rounded-full"></div>
+                <div className="w-48 h-48 bg-gray-900 absolute inset-x-0 bottom-0 rounded-full"></div>
               </div>
               <img
                 className="w-44 h-44 rounded-full relative "

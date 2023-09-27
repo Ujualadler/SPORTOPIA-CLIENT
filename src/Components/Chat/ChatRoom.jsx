@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import UserAxios from "../../Axios/userAxios";
 import { ClipLoader } from "react-spinners";
-import { useNavigate } from "react-router-dom";
+
 
 
 function ChatRoom() {
@@ -173,7 +173,7 @@ function ChatRoom() {
           >
           {loading ? (
             <div className="flex justify-center mt-40 h-80">
-              <ClipLoader color="#ffffff" loading={loading} size={150} />
+              <ClipLoader color="#ffffff" loading={loading} size={70} />
             </div>
           ):messages?.map((msg, index) => (
               <div  className="chat-message ">
@@ -232,7 +232,7 @@ function ChatRoom() {
             ))}
           </div>
         </div>
-        <div className="border-t-2 border-gray-200  px-4 pt-4 mb-2 sm:mb-0">
+        <div className="border-t-2 border-gray-200   pt-4 mb-2 sm:mb-0">
           <div className="relative flex">
             <span className="absolute inset-y-0 flex items-center">
               <button

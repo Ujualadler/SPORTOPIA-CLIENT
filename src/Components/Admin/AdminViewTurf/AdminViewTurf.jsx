@@ -4,18 +4,23 @@ import Adminaxios from "../../../Axios/adminAxios";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { ClipLoader } from "react-spinners";
 
 function AdminViewTurf() {
-  const adminAxios=Adminaxios()
+  const adminAxios = Adminaxios();
   const token = useSelector((store) => store.Admin.Token);
   const [turfData, setTurfData] = useState([]);
   const [SearchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    adminAxios.get("/turflist")
+    setLoading(true);
+
+    adminAxios
+      .get("/turflist")
       .then((response) => {
-        console.log(response.data);
         setTurfData(response.data.result);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -24,31 +29,35 @@ function AdminViewTurf() {
 
   const blockTurf = async (id) => {
     try {
-      console.log(id);
       const response = await adminAxios.get(`/blockTurf?id=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       Swal.fire({
-        title:"Are you sure?",
-        text:turfData[0].isTurfBlocked===true?"Do you want to unblock this Turf!":"Do you want to block this Turf!",
+        title: "Are you sure?",
+        text:
+          turfData[0].isTurfBlocked === true
+            ? "Do you want to unblock this Turf!"
+            : "Do you want to block this Turf!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText:turfData[0].isTurfBlocked===true?"Yes, Unblock it !":"Yes,block it !",
-    }).then((result) => {
+        confirmButtonText:
+          turfData[0].isTurfBlocked === true
+            ? "Yes, Unblock it !"
+            : "Yes,block it !",
+      }).then((result) => {
         if (result.isConfirmed) {
-          if(response.data.result[0].isTurfBlocked===true){
+          if (response.data.result[0].isTurfBlocked === true) {
             Swal.fire("BLOCKED!", "Turf blocked.", "success");
-          }else{
+          } else {
             Swal.fire("UNBLOCKED!", "Turf Unblocked.", "success");
           }
-            setTurfData(response.data.result);
+          setTurfData(response.data.result);
         }
-    });
-    
+      });
     } catch (error) {
       console.log(error);
     }
@@ -120,46 +129,56 @@ function AdminViewTurf() {
               </tr>
             </thead>
             <tbody>
-              {turfData
-                .filter((turf) =>
-                  turf.turfName.toLowerCase().includes(SearchInput.toLowerCase())
-                )
-                .map((obj, index) => {
-                  return (
-                    <tr
-                      key={obj._id}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                    >
-                      <th key={obj._id} className="pl-9">
-                        {index + 1}
-                      </th>
-                      <td className="px-6 py-4 "><img className="w-16" src={obj.logo} alt="" /></td>
-                      <td className="px-6 py-4">{obj.turfName}</td>
-                      <td className="px-6 py-4">{obj.turfType}</td>    
-                      <td className="px-6 py-4">{obj.phone}</td>
-                      <td className="px-6 py-4">
-                        {obj.isTurfBlocked ? (
-                          <button
-                            onClick={() => blockTurf(obj._id)}
-                            key={obj._id}
-                            className=" bg-green-900 w-15 text-white font-mono rounded-md w-[4rem]"
-                          >
-                            UNBLOCK
-                          </button>
-                        ) : (
-                          <button
-                            key={obj._id}
-                            onClick={() => blockTurf(obj._id)}
-                            className=" bg-red-800 w-15 text-white font-mono rounded-md w-[4rem]"
-                          >
-                            BLOCK
-                          </button>
-                        )}
-                        ̥
-                      </td>
-                    </tr>
-                  );
-                })}
+              {loading ? (
+                <div className="flex justify-center mt-40 h-80">
+                  <ClipLoader color="#ffffff" loading={loading} size={70} />
+                </div>
+              ) : (
+                turfData
+                  .filter((turf) =>
+                    turf.turfName
+                      .toLowerCase()
+                      .includes(SearchInput.toLowerCase())
+                  )
+                  .map((obj, index) => {
+                    return (
+                      <tr
+                        key={obj._id}
+                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      >
+                        <th key={obj._id} className="pl-9">
+                          {index + 1}
+                        </th>
+                        <td className="px-6 py-4 ">
+                          <img className="w-16" src={obj.logo} alt="" />
+                        </td>
+                        <td className="px-6 py-4">{obj.turfName}</td>
+                        <td className="px-6 py-4">{obj.turfType}</td>
+                        <td className="px-6 py-4">{obj.phone}</td>
+                        <td className="px-6 py-4">
+                          {obj.isTurfBlocked ? (
+                            <button
+                              onClick={() => blockTurf(obj._id)}
+                              key={obj._id}
+                              className=" bg-green-900 w-15 text-white font-mono rounded-md w-[4rem]"
+                            >
+                              UNBLOCK
+                            </button>
+                          ) : (
+                            <button
+                              key={obj._id}
+                              onClick={() => blockTurf(obj._id)}
+                              className=" bg-red-800 w-15 text-white font-mono rounded-md w-[4rem]"
+                            >
+                              BLOCK
+                            </button>
+                          )}
+                          ̥
+                        </td>
+                      </tr>
+                    );
+                  })
+              )}
             </tbody>
           </table>
         </div>

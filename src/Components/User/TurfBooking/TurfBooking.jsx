@@ -207,7 +207,7 @@ const TurfBooking = () => {
   const [userLatitude, setUserLatitude] = useState(null);
   const [userLongitude, setUserLongitude] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -215,15 +215,20 @@ const TurfBooking = () => {
           setUserLongitude(position.coords.longitude);
         },
         (error) => {
-          navigate("/error");
-          toast.error("Please allow location permission");
+          if (error.code === 1) {
+            // User denied location permission
+            toast.error("To use this feature, please allow location permission in your browser settings.");
+          } else {
+            // Handle other geolocation errors
+            console.error("Geolocation error:", error.message);
+          }
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
-      console.error("Geolocation is not supported by this browser.");
     }
   }, []);
+  
 
   useEffect(() => {
     const newSocket = io("https://api.spotopia.site/booking");

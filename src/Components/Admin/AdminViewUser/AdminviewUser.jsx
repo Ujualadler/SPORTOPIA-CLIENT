@@ -4,20 +4,27 @@ import Adminaxios from "../../../Axios/adminAxios";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import { ClipLoader } from "react-spinners";
+
 
 function AdminviewUser() {
+  const adminAxios = Adminaxios();
 
-  const adminAxios=Adminaxios()
-  
   const token = useSelector((store) => store.Admin.Token);
   const [userData, setUserData] = useState([]);
   const [SearchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
-    adminAxios.get("/userlist")
+    setLoading(true);
+
+    adminAxios
+      .get("/userlist")
       .then((response) => {
         console.log(response.data);
         setUserData(response.data.result);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -29,24 +36,29 @@ function AdminviewUser() {
       console.log(id);
       const response = await adminAxios.get(`/blockUser?id=${id}`);
       Swal.fire({
-        title:"Are you sure?",
-        text:userData[0].isBlocked===true?"Do you want to unblock this user!":"Do you want to block this user!",
+        title: "Are you sure?",
+        text:
+          userData[0].isBlocked === true
+            ? "Do you want to unblock this user!"
+            : "Do you want to block this user!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText:userData[0].isBlocked===true?"Yes, Unblock it !":"Yes,block it !",
-    }).then((result) => {
+        confirmButtonText:
+          userData[0].isBlocked === true
+            ? "Yes, Unblock it !"
+            : "Yes,block it !",
+      }).then((result) => {
         if (result.isConfirmed) {
-          if(response.data.result[0].isBlocked===true){
+          if (response.data.result[0].isBlocked === true) {
             Swal.fire("BLOCKED!", "User has been blocked.", "success");
-          }else{
+          } else {
             Swal.fire("UNBLOCKED!", "User has been Unblocked.", "success");
           }
-            setUserData(response.data.result);
+          setUserData(response.data.result);
         }
-    });
-    
+      });
     } catch (error) {
       console.log(error);
     }
@@ -118,46 +130,62 @@ function AdminviewUser() {
               </tr>
             </thead>
             <tbody>
-              {userData
-                .filter((user) =>
-                  user.name.toLowerCase().includes(SearchInput.toLowerCase())
-                )
-                .map((obj, index) => {
-                  return (
-                    <tr
-                      key={obj?._id}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                    >
-                      <th key={obj?._id} className="pl-9">
-                        {index + 1}
-                      </th>
-                      <td className="px-6 py-4"><img className="w-16" src={obj.image?obj.image:'https://as1.ftcdn.net/v2/jpg/02/09/95/42/1000_F_209954204_mHCvAQBIXP7C2zRl5Fbs6MEWOEkaX3cA.jpg'} alt="" /></td>
-                      <td className="px-6 py-4">{obj?.name}</td>
-                      <td className="px-6 py-4">{obj?.email}</td>
-                      <td className="px-6 py-4">{obj?.contactNumber}</td>
-                      <td className="px-6 py-4">
-                        {obj.isBlocked ? (
-                          <button
-                            onClick={() => blockUser(obj?._id)}
-                            key={obj._id}
-                            className=" bg-green-900 w-15 text-white font-mono rounded-md w-[4rem]"
-                          >
-                            UNBLOCK
-                          </button>
-                        ) : (
-                          <button
-                            key={obj._id}
-                            onClick={() => blockUser(obj._id)}
-                            className=" bg-red-800 w-15 text-white font-mono rounded-md w-[4rem]"
-                          >
-                            BLOCK
-                          </button>
-                        )}
-                        ̥
-                      </td>
-                    </tr>
-                  );
-                })}
+              {loading ? (
+                <div className="flex justify-center mt-40 h-80">
+                  <ClipLoader color="#ffffff" loading={loading} size={70} />
+                </div>
+              ) : (
+                userData
+                  .filter((user) =>
+                    user.name.toLowerCase().includes(SearchInput.toLowerCase())
+                  )
+                  .map((obj, index) => {
+                    return (
+                      <tr
+                        key={obj?._id}
+                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      >
+                        <th key={obj?._id} className="pl-9">
+                          {index + 1}
+                        </th>
+                        <td className="px-6 py-4">
+                          <img
+                            className="w-16"
+                            src={
+                              obj.image
+                                ? obj.image
+                                : "https://as1.ftcdn.net/v2/jpg/02/09/95/42/1000_F_209954204_mHCvAQBIXP7C2zRl5Fbs6MEWOEkaX3cA.jpg"
+                            }
+                            alt=""
+                          />
+                        </td>
+                        <td className="px-6 py-4">{obj?.name}</td>
+                        <td className="px-6 py-4">{obj?.email}</td>
+                        <td className="px-6 py-4">{obj?.contactNumber}</td>
+                        <td className="px-6 py-4">
+                          {obj.isBlocked ? (
+                            <button
+                              onClick={() => blockUser(obj?._id)}
+                              key={obj._id}
+                              className=" bg-green-900 w-15 text-white font-mono rounded-md w-[4rem]"
+                            >
+                              UNBLOCK
+                            </button>
+                          ) : (
+                            <button
+                              key={obj._id}
+                              onClick={() => blockUser(obj._id)}
+                              className=" bg-red-800 w-15 text-white font-mono rounded-md w-[4rem]"
+                            >
+                              BLOCK
+                            </button>
+                          )}
+                          ̥
+                        </td>
+                      </tr>
+                    );
+                  })
+              )}
             </tbody>
           </table>
         </div>

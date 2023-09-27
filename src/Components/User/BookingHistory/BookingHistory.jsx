@@ -105,10 +105,10 @@ const Bookinghistory = () => {
                       <div className="flex md:justify-between  md:items-start  w-full flex-col justify-center items-center md:flex-row space-y-4 md:space-x-8 md:space-y-0">
                         <p className="text-base xl:text-lg leading-6 mt-1">
                           <span className=" text-gray-200 mt-1 font-bold">
-                            Total:
+                            Pending Total:
                           </span>{" "}
                           <span className=" text-red-700 font-bold">
-                            ₹{data.totalAmount}
+                            ₹{data.totalAmount-data.totalAdvance}
                           </span>
                         </p>
                         <p className="text-base xl:text-lg leading-6 mt-1  text-red-700 font-bold">
@@ -117,7 +117,7 @@ const Bookinghistory = () => {
                         </p>
                         <p className="text-base xl:text-lg leading-6 mt-1 text-red-700 font-bold">
                           <span className="text-slate-200">
-                            Advance amount:
+                            Advance Amount:
                           </span>
                           ₹{data.totalAdvance}
                         </p>

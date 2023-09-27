@@ -15,8 +15,6 @@ const LazyChatRoom = React.lazy(() => {
 function ChatRoomPage() {
 
   const {role}=useParams()
-  console.log(role+'haaaaaaaaai')
-
   return (
     <>
     <Navbar/>
